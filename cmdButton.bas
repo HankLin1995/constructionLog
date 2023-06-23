@@ -46,7 +46,7 @@ For r = er To sr Step -1
     
     Set coll_code = obj.getCodes(obj.workDate + r - 1) '根據日期取得日期Codes
     
-    For j = coll_code.Count To 1 Step -1
+    For j = coll_code.count To 1 Step -1
     
         code = coll_code(j)
         
@@ -73,7 +73,7 @@ For r = er To sr Step -1
 
 Next
 
-If wb.Sheets.Count > 1 Then wb.Sheets("工作表1").Delete
+If wb.Sheets.count > 1 Then wb.Sheets("工作表1").Delete
 
 If print_mode = 3 Or print_mode = 4 Then
 

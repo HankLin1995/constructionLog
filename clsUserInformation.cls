@@ -47,7 +47,7 @@ With Sheets("±ÂÅv")
     
     If checkIsExist(mac_add) = False Then
     
-        lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+        lr = .Cells(.Rows.count, 1).End(xlUp).Row
         
         .Cells(lr + 1, 1) = mac_add
         

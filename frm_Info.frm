@@ -14,6 +14,11 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+Private Sub CommandButton1_Click()
+ERRORForm.Show
+Unload Me
+End Sub
+
 Private Sub Image2_Click()
 ActiveWorkbook.FollowHyperlink Address:="https://hankvba.blogspot.com/2018/03/autocad-vba.html", NewWindow:=True
 End Sub

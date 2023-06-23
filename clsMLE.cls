@@ -43,7 +43,7 @@ Private Sub addMLEData(ByVal mytype As String, ByVal item As String, ByVal unit 
 
 With Sheets("工料設定")
 
-    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.count, 1).End(xlUp).Row
     
     r = lr + 1
     
@@ -65,7 +65,7 @@ Sub sortData()
 
 With Sheets("工料設定")
 
-    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.count, 1).End(xlUp).Row
     
     .Range("A2").Resize(lr, 6).Sort key1:=.Columns(2), order1:=xlAscending
 
@@ -77,7 +77,7 @@ Function countType(ByVal mytype As String)
 
 With Sheets("工料設定")
 
-    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.count, 1).End(xlUp).Row
     
     For r = 2 To lr
     
@@ -150,7 +150,7 @@ Dim coll As New Collection
 
 With Sheets("工料設定")
 
-    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.count, 1).End(xlUp).Row
     
     For r = 2 To lr
     

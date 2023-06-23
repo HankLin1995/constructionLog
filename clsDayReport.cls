@@ -43,7 +43,7 @@ Dim coll As New Collection
 
 With ThisWorkbook.Sheets("日報資料庫")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
@@ -178,7 +178,7 @@ End With
 For i = 1 To 2 '施工工項、材料管理
 
 Set coll_item = getUsedItemByDate(recCode, recDate, i)
-Call checkReportCount(coll_item.Count, i)
+Call checkReportCount(coll_item.count, i)
 Call KeyInItem(coll_item, recDate, recCode, i)
 
 Next
@@ -188,7 +188,7 @@ Next
 Set coll_L = getUsedItemByDate(recCode, recDate, 3)
 Set coll_E = getUsedItemByDate(recCode, recDate, 4)
 
-Call checkReportCount(WorksheetFunction.Max(coll_L.Count, coll_E.Count), 3)
+Call checkReportCount(WorksheetFunction.Max(coll_L.count, coll_E.count), 3)
 Call KeyInItem_Merge(coll_L, coll_E, recDate, recCode, 3)
 
 '=====5-文件============
@@ -223,7 +223,7 @@ With Sheets(dataObj.getDB_name(5))
     Set rng = .Columns("A").Find(recCode)
     
     sr = rng.Row
-    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.count, 1).End(xlUp).Row
     
     For r = sr To lr
     
@@ -319,7 +319,7 @@ Function getSumAmountByItem(ByVal recItem As String, ByVal recDate As Date, ByVa
 
 With Sheets(dataObj.getDB_name(mode))
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
@@ -349,7 +349,7 @@ Function getUsedAmountByItemWithDate(ByVal recItem As String, ByVal recDate As D
 
 With Sheets(dataObj.getDB_name(mode))
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
@@ -380,7 +380,7 @@ Function getUsedAmountByItem(ByVal recItem As String, ByVal recCode As String, B
 
 With Sheets(dataObj.getDB_name(mode))
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
@@ -528,7 +528,7 @@ Dim coll_item As New Collection
 
 With ThisWorkbook.Sheets(dataObj.getDB_name(mode)) '"日報資料庫")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
     For r = 2 To lr
     
@@ -648,7 +648,7 @@ End If
 '
 'Next
 
-Call checkRows(coll.Count)
+Call checkRows(coll.count)
 
 With Sheets("日報第二聯")
 

@@ -22,7 +22,7 @@ Dim coll As New Collection
 
 With Sheets("長表格式")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 4 To lr
 
@@ -45,8 +45,8 @@ Sub clearLongReport()
 
 With Sheets("長表格式")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
-lc = .Cells(3, .Columns.Count).End(xlToLeft).Column
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
+lc = .Cells(3, .Columns.count).End(xlToLeft).Column
 
 .Range("A4").Resize(lr, lc).ClearContents
 .Range("F1").Resize(3, lc).ClearContents
@@ -59,7 +59,7 @@ Sub getReportItemByPCCES()
 
 With Sheets("契約詳細表")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 rr = 4
 For r = 2 To lr
 
@@ -95,7 +95,7 @@ Sub getReportItemByMLE(ByVal targetMode As String)
 
 With Sheets("工料設定")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 rr = 4
 
 For r = 2 To lr
@@ -184,7 +184,7 @@ shtName = writeObj.getDB_name(print_mode)
 
 With Sheets(shtName) '"日報資料庫")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
@@ -213,8 +213,8 @@ Sub SumReportAmount() '長表
 
 With Sheets("長表格式")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
-lc = .Cells(1, .Columns.Count).End(xlToLeft).Column
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
+lc = .Cells(1, .Columns.count).End(xlToLeft).Column
 
 For r = 4 To lr
 
@@ -247,7 +247,7 @@ sht.Name = "第" & cnt & "估驗"
 sht.Range("B1") = "(自費)第" & cnt & "次估驗"
 
 Application.DisplayAlerts = False
-If wb.Sheets.Count > 1 Then wb.Sheets("工作表1").Delete
+If wb.Sheets.count > 1 Then wb.Sheets("工作表1").Delete
 Application.DisplayAlerts = True
 
 End Sub

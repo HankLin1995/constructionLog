@@ -37,7 +37,7 @@ Sub clearPCCES_data()
 
 With ThisWorkbook.Sheets("契約詳細表")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 If lr > 1 Then
     .Activate
@@ -75,7 +75,7 @@ Sub getAllContents()
 
 With wb.Sheets(getShtContentName)
 
-    lr = .Cells(.Rows.Count, "F").End(xlUp).Row
+    lr = .Cells(.Rows.count, "F").End(xlUp).Row
     
     For r = 9 To lr
     
@@ -136,7 +136,7 @@ Private Sub getData(ByVal num As String, ByVal cont As String, ByVal unit As Str
 
     With ThisWorkbook.Sheets("契約詳細表")
     
-        lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+        lr = .Cells(.Rows.count, 1).End(xlUp).Row
         
         r = lr + 1
         
@@ -159,7 +159,7 @@ Sub setValidation()
 
 With Sheets("契約詳細表")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 'Debug.Print lr
 
@@ -189,8 +189,8 @@ Sub RefreshDB()
 
 With Sheets("長表格式")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
-lc = .Cells(1, .Columns.Count).End(xlToLeft).Column
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
+lc = .Cells(1, .Columns.count).End(xlToLeft).Column
 
 .Range("A4").Resize(lr, lc).ClearContents
 .Range("F1").Resize(3, lc).ClearContents
@@ -199,7 +199,7 @@ End With
 
 With Sheets("範本資料庫")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 .Range("A2").Resize(lr, 8).ClearContents
 
 End With
@@ -213,7 +213,7 @@ For i = LBound(arr) To UBound(arr)
     
         .Unprotect
         
-        lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+        lr = .Cells(.Rows.count, 1).End(xlUp).Row
         .Range("A2").Resize(lr, 8).ClearContents
         
         .Protect
@@ -228,7 +228,7 @@ Function getSumMoney()
 
 With Sheets("契約詳細表")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 Set rng = .Rows("1").Find("數量")
 
@@ -267,7 +267,7 @@ Dim coll As New Collection
 
 With Sheets("契約詳細表")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 2 To lr
     
@@ -289,7 +289,7 @@ Dim coll As New Collection
 
 With Sheets("契約詳細表")
 
-lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+lr = .Cells(.Rows.count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
