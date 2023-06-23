@@ -31,6 +31,7 @@ Debug.Assert user_mac <> ""
 
 'user_mac = getUnicode(user_mac)
 user_name = getUnicode(user_name)
+'user_mail = getUnicode(user_mail)
 user_company = getUnicode(user_company)
 msg = getUnicode(msg)
 
@@ -46,6 +47,8 @@ CreateURL = URL & "?func=" & mode & _
                     "&workgroup=" & user_company & _
                     "&mymail=" & user_mail & _
                     "&msg=" & msg
+                    
+                    Debug.Print CreateURL
                     
 End Function
 
@@ -63,7 +66,12 @@ With XMLHTTP
     If .Status = 200 Then
     
         tmp = Split(.responsetext, "***")
-        ExecHTTP = tmp(1)
+        
+        If UBound(tmp) <> 0 Then
+        
+            ExecHTTP = tmp(1)
+        
+        End If
         
     Else
 ERRORHANDLE:

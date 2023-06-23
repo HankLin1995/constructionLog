@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ERRORForm 
-   Caption         =   "系統錯誤回報"
+   Caption         =   "系統回報"
    ClientHeight    =   4650
    ClientLeft      =   105
    ClientTop       =   450
@@ -25,7 +25,10 @@ user_company = Me.tboJob.Text
 user_mail = Me.tboMail.Text
 msg = Me.tboMSG.Text
 
-myURL_GAS = o.CreateURL("ERRORMSG", user_name, user_company, user_mail, msg)
+Dim o2 As New clsUserInformation
+Mac = o2.getMacAddress
+
+myURL_GAS = o.CreateURL("ERRORMSG", Mac, user_name, user_company, user_mail, msg)
 o.ExecHTTP (myURL_GAS)
 
 MsgBox "已發送成功，等候通知!", vbInformation

@@ -25,3 +25,7 @@ End Sub
 Private Sub Label14_Click()
 ActiveWorkbook.FollowHyperlink Address:="https://drive.google.com/file/d/15YBr3PcAcV0MDOYtxsYRgYfFXP1RWCxX/view?usp=share_link", NewWindow:=True
 End Sub
+
+Private Sub Label15_Click()
+ActiveWorkbook.FollowHyperlink Address:="https://creativecommons.org/licenses/by-nc/3.0/tw/legalcode", NewWindow:=True
+End Sub
