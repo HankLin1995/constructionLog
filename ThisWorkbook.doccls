@@ -1,0 +1,51 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "ThisWorkbook"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Private Sub Workbook_Open()
+
+'Dim obj As New clsFetchURL
+'If obj.checkAccessByIP = False Then frm_login.Show
+'
+'MsgBox "設計者：林宗漢(Hank Lin) @2022" & vbNewLine & _
+'       "" & vbNewLine & _
+'        "手機：0912052274" & vbNewLine & _
+'       "電子郵件：apple84026113@gmail.com" & vbNewLine & _
+'       "部落格：https://hankvba.blogspot.com/" & vbNewLine & _
+'       "版權聲明"
+
+'On Error Resume Next
+
+'Application.StatusBar = "設計者：林宗漢(Hank Lin) @2021"
+
+'Dim o As New clsMacAddress
+'o.Login
+'
+'Dim pccesObj As New clsPCCES
+'
+'pccesObj.setValidation
+'
+'Dim o2 As New clsUserInformation
+'o2.showCmd
+'o2.Login
+
+'Call CheckIfSigned
+
+'UserForm2.Show
+
+Dim o As New clsUserInformation
+
+o.hideCmd
+
+Call FetchURL_Main
+
+frm_Info.Show
+
+End Sub
+
+
