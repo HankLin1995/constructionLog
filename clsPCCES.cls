@@ -146,7 +146,7 @@ Private Sub getData(ByVal num As String, ByVal cont As String, ByVal unit As Str
         .Cells(r, 5) = amount
         .Cells(r, 6) = cost
         
-        .Cells(r, 1) = num & ">" & cont
+        .Cells(r, 1) = "=RC[1]&"">""&RC[2]" ' num & ">" & cont
         .Cells(r, 1).WrapText = False
         
         If unit = "" Then .Range("A" & r & ":F" & r).Interior.ColorIndex = 22

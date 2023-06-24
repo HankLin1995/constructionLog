@@ -135,7 +135,7 @@ If o.ExecHTTP(myURL) = "signed" Then
     IsClientSigned = True
 Else
 
-myMail = InputBox("請輸入可正常使用之Email帳號!")
+'myMail = InputBox("請輸入可正常使用之Email帳號!")
 
 'If myMail = "" Then Stop
 

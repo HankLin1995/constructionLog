@@ -29,7 +29,7 @@ d = mid(mydatestr, 6, 2)
 
 On Error GoTo ERRORHANDLE:
 
-a = CDate(1911 + Y & "/" & m & "/" & d)
+A = CDate(1911 + Y & "/" & m & "/" & d)
 
 Exit Function
 

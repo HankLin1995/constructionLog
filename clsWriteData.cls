@@ -144,9 +144,9 @@ With shtData
     If test_mode = False Then
         recDate = InputBox("新增填報日期(EX:1110316)")
     Else
-        a = Format(WorksheetFunction.RandBetween(1, 12), "00")
+        A = Format(WorksheetFunction.RandBetween(1, 12), "00")
         b = Format(WorksheetFunction.RandBetween(1, 28), "00")
-        recDate = "111" & a & b
+        recDate = "111" & A & b
     End If
     
     Set checkObj.MainRowColl = getMainRowColl

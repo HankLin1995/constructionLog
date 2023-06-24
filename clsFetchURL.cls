@@ -8,9 +8,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'HankLin edited @ 20210823
-'使用雲端授權結合Google app script當作後臺控制
-'應用xlpadlock編譯xls變成exe檔案即可達到小白無法侵入的等級
-'GAS程式碼@Ume/雲端授權_FINAL_繪圖資料庫
+
+'GAS程式碼@VBA2-使用者登記冊-公共工程施工日誌
 
 
 Dim XMLHTTP As Object
@@ -48,8 +47,6 @@ CreateURL = URL & "?func=" & mode & _
                     "&mymail=" & user_mail & _
                     "&msg=" & msg
                     
-                    Debug.Print CreateURL
-                    
 End Function
 
 Function ExecHTTP(ByVal myURL As String)
@@ -67,15 +64,15 @@ With XMLHTTP
     
         tmp = Split(.responsetext, "***")
         
-        If UBound(tmp) <> 0 Then
+        'If UBound(tmp) <> 0 Then
         
             ExecHTTP = tmp(1)
         
-        End If
+        'End If
         
     Else
 ERRORHANDLE:
-        MsgBox "你沒有連線!", vbCritical
+        MsgBox "Something ERROR!", vbCritical
         
         'clientObj.hideCmd
         
