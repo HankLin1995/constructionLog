@@ -45,8 +45,10 @@ Sub clearLongReport()
 
 With Sheets("長表格式")
 
-lr = .Cells(.Rows.count, 1).End(xlUp).Row
-lc = .Cells(3, .Columns.count).End(xlToLeft).Column
+Set rng = .Cells.SpecialCells(xlCellTypeLastCell)
+
+lr = rng.Row '.Cells(.Rows.count, 1).End(xlUp).Row
+lc = rng.Column '.Cells(3, .Columns.count).End(xlToLeft).Column
 
 .Range("A4").Resize(lr, lc).ClearContents
 .Range("F1").Resize(3, lc).ClearContents

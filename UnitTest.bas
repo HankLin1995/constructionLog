@@ -1,12 +1,4 @@
 Attribute VB_Name = "UnitTest"
-Sub test_PCCES_col()
-
-r = 2
-
-Cells(r, 1) = "=RC[1]&"">""&RC[2]"
-
-End Sub
-
 Sub test_getDataByDate_second()
 
 Dim o As New clsDayReport

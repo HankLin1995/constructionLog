@@ -58,8 +58,6 @@ myFolder = getSavedFolder
 
 Set coll_path = GetFilePathsInFolder(myFolder)
 
-Call DeleteCodes
-
 For Each filePath In coll_path
 
     Filename = mid(filePath, InStrRev(filePath, "\") + 1)
