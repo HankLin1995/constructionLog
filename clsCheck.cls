@@ -25,11 +25,11 @@ If Len(mydatestr) <> 7 Then GoTo ERRORHANDLE
 
 Y = mid(mydatestr, 1, 3)
 m = mid(mydatestr, 4, 2)
-d = mid(mydatestr, 6, 2)
+D = mid(mydatestr, 6, 2)
 
 On Error GoTo ERRORHANDLE:
 
-A = CDate(1911 + Y & "/" & m & "/" & d)
+A = CDate(1911 + Y & "/" & m & "/" & D)
 
 Exit Function
 

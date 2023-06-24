@@ -49,7 +49,7 @@ With Sheets("範本資料庫")
 
 '.Unprotect
 
-lr = .Cells(.Rows.count, 1).End(xlUp).Row
+lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 r = lr + 1
 
 For i = LBound(arr) To UBound(arr)
@@ -74,7 +74,7 @@ Dim coll As New Collection
 
 With Sheets("範本資料庫")
 
-lr = .Cells(.Rows.count, 1).End(xlUp).Row
+lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
@@ -104,7 +104,7 @@ With Sheets("範本資料庫")
 
 '.Unprotect
 
-lr = .Cells(.Rows.count, 1).End(xlUp).Row
+lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 For r = 2 To lr
 

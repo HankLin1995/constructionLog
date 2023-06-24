@@ -41,7 +41,7 @@ For r = er To sr Step -1
     
     Debug.Print obj.workDate + r - 1
     
-    If coll_code.count <> 0 Then
+    If coll_code.Count <> 0 Then
     
         For Each it In coll_code
         

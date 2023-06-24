@@ -46,7 +46,7 @@ For r = er To sr Step -1
     
     Set coll_code = obj.getCodes(obj.workDate + r - 1) '根據日期取得日期Codes
     
-    For j = coll_code.count To 1 Step -1
+    For j = coll_code.Count To 1 Step -1
     
         code = coll_code(j)
         
@@ -73,7 +73,7 @@ For r = er To sr Step -1
 
 Next
 
-If wb.Sheets.count > 1 Then wb.Sheets("工作表1").Delete
+If wb.Sheets.Count > 1 Then wb.Sheets("工作表1").Delete
 
 If print_mode = 3 Or print_mode = 4 Then
 
@@ -426,4 +426,129 @@ Dim writeObj As New clsWriteData
 Call writeObj.hideRng(5, False)
 
 End Sub
+
+Sub cmdGetProgByInter() '20230624
+
+Call checkProgSetting
+Set collProg = getProgColl
+
+With Sheets("天氣設定")
+
+    lr = .Cells(.Rows.Count, 4).End(xlUp).Row
+
+    For r = 2 To lr
+    
+        myProg = .Cells(r, 4)
+        
+        If myProg = "" Then
+        
+            For i = 1 To collProg.Count
+                
+                tmp = Split(collProg(i), ":")
+                
+                If r <= CInt(tmp(0)) Then
+                
+                    r1 = Split(collProg(i - 1), ":")(0)
+                    p1 = Split(collProg(i - 1), ":")(1)
+                    
+                    r2 = Split(collProg(i), ":")(0)
+                    p2 = Split(collProg(i), ":")(1)
+                    
+                    newProg = Round(((r2 - r) * p1 + (r - r1) * p2) / (r2 - r1), 2)
+                    
+                    Exit For
+                
+                End If
+            
+            Next
+            
+            .Cells(r, 4) = newProg
+        
+        End If
+        
+    Next
+
+End With
+
+End Sub
+
+'-----------FUNCTION-----------------
+
+Sub checkProgSetting()
+
+fixStartDate = Sheets("標案設定").Range("B3")
+fixEndDate = Sheets("標案設定").Range("B4")
+
+With Sheets("天氣設定")
+
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+    
+    progStartDate = .Cells(2, 1)
+    progStartProg = .Cells(2, 4)
+    progEndDate = .Cells(lr, 1)
+    progEndProg = .Cells(lr, 4)
+    
+    If progStartDate <> fixStartDate Then
+    
+        MsgBox ("開工日「" & progStartDate & "」，與標案設定開工日「" & fixStartDate & "」不一樣!"), vbCritical
+        End
+        
+    End If
+    
+    If progEndDate <> fixEndDate Then
+    
+        MsgBox ("竣工日「" & progEndDate & "」，與標案設定竣工「" & fixEndDate & "」不一樣!"), vbCritical
+        End
+        
+    End If
+    
+    If progStartProg = "" Then
+    
+        .Cells(2, 4) = 0
+        MsgBox "系統自動於開工日補上0%", vbInformation
+        
+    End If
+    
+    If progEndProg <> 1 Then
+    
+        .Cells(lr, 4) = 1
+        MsgBox "系統自動於竣工日補上100%", vbInformation
+    
+    End If
+    
+End With
+
+End Sub
+
+Function getProgColl()
+
+Dim coll As New Collection
+
+With Sheets("天氣設定")
+
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+
+    '------main-----------
+    
+    For r = 2 To lr
+    
+        myDate = .Cells(r, 1)
+        myProg = .Cells(r, 4)
+        
+        If myProg <> "" Then
+        
+            coll.Add r & ":" & myProg
+        
+        End If
+    
+    Next
+    
+End With
+
+Set getProgColl = coll
+
+If coll.Count = 2 Then MsgBox ("建議在預定進度的欄位「D」填寫進度，內差成果才會比較準確!"), vbCritical
+
+End Function
+
 

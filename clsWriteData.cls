@@ -105,7 +105,7 @@ With Sheets(getDB_name(mode))
 
     .Unprotect
     
-    lr = .Cells(.Rows.count, 1).End(xlUp).Row + 1
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row + 1
     
     For i = 1 To 7
     
@@ -113,7 +113,7 @@ With Sheets(getDB_name(mode))
     
     Next
     
-    lr = .Cells(.Rows.count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
     .Range("A2").Resize(lr, 8).Sort key1:=.Columns(1), order1:=xlAscending
     
@@ -324,7 +324,7 @@ For Each it In arr
 
 Next
 
-lr = .Cells(.Rows.count, 2).End(xlUp).Row
+lr = .Cells(.Rows.Count, 2).End(xlUp).Row
 
 coll.Add coll(5) + 10
 

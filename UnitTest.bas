@@ -203,7 +203,7 @@ Case "N"
 
     With Sheets("契約詳細表")
 
-        lr = .Cells(.Rows.count, 1).End(xlUp).Row
+        lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         r = WorksheetFunction.RandBetween(1, lr)
         test_item = .Range("A" & r)
         test_note = .Range("G" & r)
@@ -227,7 +227,7 @@ Dim o As New clsMLE
 
 With Sheets("工料設定")
 
-    lr = .Cells(.Rows.count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
     
     For r = 2 To lr
     

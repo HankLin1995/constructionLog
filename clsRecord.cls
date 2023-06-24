@@ -39,7 +39,7 @@ With shtRec
 
     .Unprotect
 
-    lr = .Cells(.Rows.count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
     
     For r = 2 To lr
     
@@ -74,7 +74,7 @@ With shtRec
 
     .Unprotect
 
-    lr = .Cells(.Rows.count, 1).End(xlUp).Row
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
     
     For r = 2 To lr
     
@@ -139,7 +139,7 @@ For i = 1 To 5
     
         .Unprotect
             
-        lr = .Cells(.Rows.count, 1).End(xlUp).Row
+        lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         
         For r = 2 To lr
         
@@ -181,7 +181,7 @@ For i = 1 To 4
     
         .Unprotect
         
-        lr = .Cells(.Rows.count, 1).End(xlUp).Row
+        lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         
         For r = 2 To lr
         
@@ -237,7 +237,7 @@ Function getRecLoc(ByVal recCode As String)
 
 With Sheets("日報資料庫")
 
-lr = .Cells(.Rows.count, 1).End(xlUp).Row
+lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
