@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frm_Info 
-   Caption         =   "Åwªï¨Ï¥Î"
+   Caption         =   "ConstructionLog"
    ClientHeight    =   6540
    ClientLeft      =   120
    ClientTop       =   465

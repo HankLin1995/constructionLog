@@ -13,37 +13,22 @@ Else
     
     myChoose = Split(Status, ",")
 
-    'If Status <> "PASS" Then
     If myChoose(0) <> "PASS" Then
     
-        'MsgBox "程式未經授權，即將關閉!", vbCritical
-        MsgBox "您的使用期限已到," & vbNewLine & "如欲繼續使用請加HankLin的LINE", vbInformation
+        MsgBox "您的版本已無法繼續使用!", vbCritical
         
         frm_EndQRCode.Show
     
-        'ThisWorkbook.Close False
-        'Application.Quit
-        
-        'Dim o As New clsUserInformation
-        'o.hideCmd
-        
     Else
     
-        'MsgBox "授權成功!" & vbNewLine & "試用版剩餘天數【" & myChoose(1) & "】天" & vbNewLine & "如有使用上的問題請加HankLin的LINE", vbInformation
-        
         Call ShowDialoge(myChoose(3))
         Call ShowDialoge(myChoose(2))  ', myChoose(3))
-        
-        'If myChoose(2) <> "" Then MsgBox "***個人公告***" & vbNewLine & vbNewLine & "『" & myChoose(2) & "』"
-        'If myChoose(3) <> "" Then MsgBox "***系統公告***" & vbNewLine & vbNewLine & "『" & myChoose(3) & "』"
-        
+
         '==========1206Add for 按鈕控制 ============
         
         Dim o As New clsUserInformation
         o.showCmd
-        
-        '=================================
-        
+
     End If
 
 End If
@@ -58,7 +43,6 @@ tmp = Split(s1, ":")
 
 frmMSG.Label1.caption = tmp(0) ' caption
 frmMSG.TextBox1.Value = tmp(1) ' s1
-'UserForm3.TextBox2.Value = s2
 frmMSG.Show
 
 End Sub
@@ -91,23 +75,6 @@ Case "NOT_FOUND"
 
 Case "ARRIVED":
 
-'        myStd = DesktopZoom()
-'
-'        Call System.Workbook_Open2(X, Y)
-'
-'        myHeight = Y * 0.2 * 100 / myStd
-'        myWidth = X * 0.2 * 100 / myStd
-'
-'        Debug.Print myHeight & ":" & myWidth
-'
-'        UserForm1.Height = myHeight
-'        UserForm1.Width = myWidth
-'        UserForm1.Image1.Height = myHeight
-'        UserForm1.Image1.Width = myWidth
-         'UserForm1.Show
-
-    'MsgBox "偵測到使用天數為0日，如果要使用請購買正式版!", vbInformation
-
 Case Else
 
     Debug.Print Status
@@ -135,14 +102,9 @@ If o.ExecHTTP(myURL) = "signed" Then
     IsClientSigned = True
 Else
 
-'myMail = InputBox("請輸入可正常使用之Email帳號!")
-
-'If myMail = "" Then Stop
-
 myURL = o.CreateURL("SignDetail", mac_add, , , myMail)
 Call o.ExecHTTP(myURL)
 
-'Sheets("縱斷面繪圖").Range("E1") = myMail
 End If
 
 End Function
