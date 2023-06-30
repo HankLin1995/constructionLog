@@ -113,6 +113,8 @@ With Sheets(getDB_name(mode))
     
     Next
     
+    .Cells(lr, 2).NumberFormatLocal = "@"
+    
     lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
     .Range("A2").Resize(lr, 8).Sort key1:=.Columns(1), order1:=xlAscending
@@ -155,8 +157,8 @@ With shtData
     recCode = recDate & "-" & recObj.getCodeCount(recDate)
     .Unprotect
     .Range("B1") = recCode
-    '.Range("B2") = recDate
-    .Range("B2") = "'" & recDate
+    .Range("B2") = recDate
+    .Range("B2").NumberFormatLocal = "@"
     .Protect
 End With
 
