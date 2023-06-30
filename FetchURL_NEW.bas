@@ -10,11 +10,11 @@ If MAC_ADDRESS = "" Then
 Else
 
     Status = AccessStatus(MAC_ADDRESS)
-    
+
     myChoose = Split(Status, ",")
 
     If myChoose(0) <> "PASS" Then
-    
+
         MsgBox "您的版本已無法繼續使用!", vbCritical
         
         frm_EndQRCode.Show

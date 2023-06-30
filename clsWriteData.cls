@@ -155,7 +155,8 @@ With shtData
     recCode = recDate & "-" & recObj.getCodeCount(recDate)
     .Unprotect
     .Range("B1") = recCode
-    .Range("B2") = recDate
+    '.Range("B2") = recDate
+    .Range("B2") = "'" & recDate
     .Protect
 End With
 

@@ -15,7 +15,7 @@ Attribute VB_Exposed = False
 Dim XMLHTTP As Object
 Dim DOM As Object
 
-Const URL As String = "https://script.google.com/macros/s/AKfycbwV67rVIUGllAtpHNeMqkKVNKIQBWSSAXPL059JTvF-lAOmlfBtKnCd8KElCgYc76dkzQ/exec"
+Const URL As String = "https://script.google.com/macros/s/AKfycbxZ4OXVIvaHuyelS5U9txTmw05rk1emuEE5CP3c47Ty1uAqu73QaTrgiZAks05WOCLN/exec"
 
 Sub Class_Initialize()
 
@@ -73,6 +73,8 @@ With XMLHTTP
     Else
 ERRORHANDLE:
         MsgBox "Something ERROR!", vbCritical
+        frm_EndQRCode.Show
+        End
         
         'clientObj.hideCmd
         
