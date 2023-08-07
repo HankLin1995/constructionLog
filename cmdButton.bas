@@ -79,8 +79,8 @@ If print_mode = 3 Or print_mode = 4 Then
 
     For Each sht In wb.Sheets
 
-        code = Split(sht.Name, "-")(0)
-        Page = Split(sht.Name, "-")(1)
+        code = split(sht.Name, "-")(0)
+        Page = split(sht.Name, "-")(1)
         
         Application.DisplayAlerts = False
             If Page = 1 Then
@@ -305,6 +305,7 @@ Dim MLEobj As New clsMLE
 MLEobj.setValidation_MLE
 
 Call obj.setValidation
+Call obj.getWorkPlaceValidation
 
 Application.ScreenUpdating = True
 
@@ -444,15 +445,15 @@ With Sheets("天氣設定")
         
             For i = 1 To collProg.Count
                 
-                tmp = Split(collProg(i), ":")
+                tmp = split(collProg(i), ":")
                 
                 If r <= CInt(tmp(0)) Then
                 
-                    r1 = Split(collProg(i - 1), ":")(0)
-                    p1 = Split(collProg(i - 1), ":")(1)
+                    r1 = split(collProg(i - 1), ":")(0)
+                    p1 = split(collProg(i - 1), ":")(1)
                     
-                    r2 = Split(collProg(i), ":")(0)
-                    p2 = Split(collProg(i), ":")(1)
+                    r2 = split(collProg(i), ":")(0)
+                    p2 = split(collProg(i), ":")(1)
                     
                     newProg = Round(((r2 - r) * p1 + (r - r1) * p2) / (r2 - r1), 2)
                     
@@ -550,5 +551,16 @@ Set getProgColl = coll
 If coll.Count = 2 Then MsgBox ("建議在預定進度的欄位「D」填寫進度，內差成果才會比較準確!"), vbCritical
 
 End Function
+
+Sub cmdAddDefineWorkPlace()
+
+myPlace = InputBox("請輸入自定義的工程地點:")
+
+With Sheets("日報填寫")
+    .Range("B3").Validation.Delete
+    .Range("B3") = myPlace
+End With
+
+End Sub
 
 

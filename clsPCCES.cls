@@ -23,7 +23,7 @@ F = Application.GetOpenFilename
 
 If F = "False" Then MsgBox "未取得檔案", vbCritical: End
 
-tmp = Split(F, "\")
+tmp = split(F, "\")
 
 wbname = tmp(UBound(tmp))
 

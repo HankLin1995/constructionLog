@@ -11,7 +11,7 @@ Else
 
     Status = AccessStatus(MAC_ADDRESS)
 
-    myChoose = Split(Status, ",")
+    myChoose = split(Status, ",")
 
     If myChoose(0) <> "PASS" Then
 
@@ -39,7 +39,7 @@ Sub ShowDialoge(ByVal s1 As String) ', ByVal s2 As String)
 
 If s1 = "" Then Exit Sub
 
-tmp = Split(s1, ":")
+tmp = split(s1, ":")
 
 frmMSG.Label1.caption = tmp(0) ' caption
 frmMSG.TextBox1.Value = tmp(1) ' s1
@@ -57,7 +57,7 @@ Dim bIsClientSigned As Boolean
 myURL = o.CreateURL("Access", mac_add)
 Status = o.ExecHTTP(myURL)
 
-myChoose = Split(Status, ",")
+myChoose = split(Status, ",")
 
 Select Case myChoose(0) 'Status
 

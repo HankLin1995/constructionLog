@@ -1,0 +1,50 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "工作表8"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+
+If Target.Column = 5 Then
+
+    Dim func As New clsFunction
+
+    c = Target.Column
+    r = Target.Row
+    
+    If r > 6 And r < 108 Then
+
+        With Sheets("日報填寫")
+    
+        .Unprotect
+    
+        item_name = .Cells(r, "A")
+        report_date = .Range("B2")
+        
+        If item_name <> "" Then
+        
+            .Cells(r, "F") = getSumByItemName(item_name, func.tranDate(report_date))
+            .Cells(r, "F").HorizontalAlignment = xlCenter
+            
+            If .Cells(r, "F") < 0 Then MsgBox "剩餘數量為負值!", vbCritical
+            
+        Else
+        
+            .Cells(r, "F") = ""
+    
+        End If
+        
+        .Protect
+        
+        End With
+    
+    End If
+
+End If
+
+End Sub
+

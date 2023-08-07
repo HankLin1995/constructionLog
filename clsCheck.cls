@@ -24,12 +24,12 @@ IsValidDate = True
 If Len(mydatestr) <> 7 Then GoTo ERRORHANDLE
 
 Y = mid(mydatestr, 1, 3)
-m = mid(mydatestr, 4, 2)
-D = mid(mydatestr, 6, 2)
+M = mid(mydatestr, 4, 2)
+d = mid(mydatestr, 6, 2)
 
 On Error GoTo ERRORHANDLE:
 
-A = CDate(1911 + Y & "/" & m & "/" & D)
+a = CDate(1911 + Y & "/" & M & "/" & d)
 
 Exit Function
 
@@ -67,7 +67,7 @@ Set coll = recObj.getSameCode
 
 For Each it In coll
 
-    tmp = Split(it, "-")(0)
+    tmp = split(it, "-")(0)
     
     myDate = funObj.tranDate(tmp)
 

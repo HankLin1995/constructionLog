@@ -42,8 +42,8 @@ Set coll_path = GetFilePathsInFolder(folderPath)
 
 For Each filePath In coll_path
 
-    Filename = mid(filePath, InStrRev(filePath, "\") + 1)
-    fileExtension = mid(Filename, InStrRev(Filename, ".") + 1)
+    filename = mid(filePath, InStrRev(filePath, "\") + 1)
+    fileExtension = mid(filename, InStrRev(filename, ".") + 1)
     
     If fileExtension = "frm" Or fileExtension = "bas" Or fileExtension = "cls" Or fileExtension = "doccls" Then
         Kill filePath
@@ -60,21 +60,21 @@ Set coll_path = GetFilePathsInFolder(myFolder)
 
 For Each filePath In coll_path
 
-    Filename = mid(filePath, InStrRev(filePath, "\") + 1)
-    fileExtension = mid(Filename, InStrRev(Filename, ".") + 1)
+    filename = mid(filePath, InStrRev(filePath, "\") + 1)
+    fileExtension = mid(filename, InStrRev(filename, ".") + 1)
     
     If fileExtension = "frm" Or fileExtension = "bas" Or fileExtension = "cls" Then
-        Call ImportCode(filePath, Filename)
+        Call ImportCode(filePath, filename)
     End If
 
 Next
 
 End Sub
 
-Sub ImportCode(ByVal filePath As String, ByVal Filename As String)
+Sub ImportCode(ByVal filePath As String, ByVal filename As String)
 
-extension = mid(Filename, InStrRev(Filename, ".") + 1)
-CodeName = mid(Filename, 1, InStrRev(Filename, ".") - 1)
+extension = mid(filename, InStrRev(filename, ".") + 1)
+CodeName = mid(filename, 1, InStrRev(filename, ".") - 1)
 
 If CodeName = "GIT" Then Exit Sub
 
@@ -155,7 +155,7 @@ Function getSavedFolder()
     With fldr
         .Title = "Select a Folder"
         .AllowMultiSelect = False
-        .InitialFileName = ThisWorkbook.Path
+        .initialFilename = ThisWorkbook.Path
         If .Show = -1 Then FolderName = .SelectedItems(1)
     End With
 getSavedFolder = FolderName

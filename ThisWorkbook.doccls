@@ -38,6 +38,8 @@ Private Sub Workbook_Open()
 
 'UserForm2.Show
 
+Set rng = Cells.Find("test", , -4163)
+
 Dim o As New clsUserInformation
 
 o.hideCmd

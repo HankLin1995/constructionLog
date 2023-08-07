@@ -2,6 +2,68 @@ Attribute VB_Name = "Module1"
 '1.CheckIfSigned
 '2.CheckPASS
 
+
+
+Function getSumByItemName(ByVal item_name_key As String, ByVal report_date As Date)
+
+'item_name_key = "壹.1>土方工作，挖土方-"
+'report_date = Now()
+
+tmp = split(item_name_key, ">")
+
+item_index = tmp(0)
+item_name = tmp(1)
+
+Dim myFunc As New clsMyfunction
+Dim func As New clsFunction
+
+Set coll_rows = myFunc.getRowsByUser2("日報資料庫", item_name, 1, "項目")
+
+'double check
+
+With Sheets("日報資料庫")
+
+    For Each r In coll_rows
+    
+        If .Cells(r, "D") = tmp(0) Then
+            
+            rec_date = func.tranDate(.Cells(r, "B"))
+            rec_note = .Cells(r, "H")
+            
+            If rec_date <= report_date And rec_note = "" Then
+            
+            item_num = .Cells(r, "G")
+            item_sum = item_sum + item_num
+        
+            End If
+        
+        Else
+        
+        End If
+    
+    Next
+
+End With
+
+With Sheets("契約詳細表")
+
+Set coll_rows_PCCES = myFunc.getRowsByUser2("契約詳細表", item_name_key, 1, "篩選欄位")
+
+For Each r_PCCES In coll_rows_PCCES
+
+    con_sum = .Cells(r_PCCES, "E")
+
+Next
+
+End With
+
+Debug.Print item_name & ":" & item_sum
+
+getSumByItemName = con_sum - item_sum
+
+End Function
+
+
 Sub test_CheckIsRepeat()
 
 Dim o As New clsPCCES
@@ -104,7 +166,7 @@ End Sub
 
 Sub test_adddata()
 
-Set rng = Range("H1")
+Set rng = Range("B3")
 region = Array("□有 □無", "■有 □無", "□有 ■無")
 
 Call data_validation_from_array(rng, region)

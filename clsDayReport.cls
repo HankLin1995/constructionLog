@@ -260,7 +260,7 @@ For Each it In coll_L
 
     If r = er Then Stop
 
-    .Range("A" & r) = Split(it, ">")(1)
+    .Range("A" & r) = split(it, ">")(1)
     .Range("C" & r) = getUsedAmountByItem(it, recCode, mode)
     .Range("E" & r) = getSumAmountByItem(it, recDate, mode)
 
@@ -274,7 +274,7 @@ For Each it In coll_E
 
     If r = er Then Stop
 
-    .Range("H" & r) = Split(it, ">")(1)
+    .Range("H" & r) = split(it, ">")(1)
     .Range("J" & r) = getUsedAmountByItem(it, recCode, mode + 1)
     .Range("L" & r) = getSumAmountByItem(it, recDate, mode + 1)
 
@@ -302,7 +302,7 @@ For Each it In coll_item
 
     If r = er Then Stop
 
-    .Range("A" & r) = Split(it, ">")(1)
+    .Range("A" & r) = split(it, ">")(1)
     .Range("E" & r) = getUnitByItem(it, mode)
     .Range("F" & r) = getAmountByItem(it, mode)
     .Range("H" & r) = getUsedAmountByItem(it, recCode, mode)
@@ -310,7 +310,7 @@ For Each it In coll_item
     
     If mode = 1 Then
     price = o.getMoneyByItemKey(it)
-    amount = .Range("H" & r)
+    amount = .Range("J" & r)
     use_money = use_money + price * amount
 
     End If
@@ -556,7 +556,8 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         recItem = .Cells(r, 5)
         recNote = .Cells(r, "H")
         
-        If print_mode = 2 Or print_mode = 3 Then '累計
+        'If print_mode = 2 Or print_mode = 3 Then '累計
+        If print_mode = 1 Or print_mode = 2 Or print_mode = 3 Then '累計
         
             If myfun.tranDate(recDate) <= myDate And recNote = "" Then
         
@@ -566,15 +567,15 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         
             End If
             
-        ElseIf print_mode = 1 Then '表單
-        
-            If recCode = myCode And recNote = "" Then
-        
-                recKey = recNum & ">" & recItem
-            
-                On Error Resume Next: coll_item.Add recKey, recKey: On Error GoTo 0
-        
-            End If
+'        ElseIf print_mode = 1 Then '表單
+'
+'            If recCode = myCode And recNote = "" Then
+'
+'                recKey = recNum & ">" & recItem
+'
+'                On Error Resume Next: coll_item.Add recKey, recKey: On Error GoTo 0
+'
+'            End If
         
         End If
     
@@ -679,7 +680,7 @@ With Sheets("日報第二聯")
     For Each it In coll
     
         .Range("A" & r) = getNumByItem(it, mode)
-        .Range("B" & r) = Split(it, ">")(1)
+        .Range("B" & r) = split(it, ">")(1)
         .Range("G" & r) = getUnitByItem(it, mode)
         .Range("H" & r) = getAmountByItem(it, mode)
         .Range("I" & r) = getUsedAmountByItemWithDate(it, recDate, mode)

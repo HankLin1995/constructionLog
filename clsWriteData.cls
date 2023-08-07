@@ -113,8 +113,6 @@ With Sheets(getDB_name(mode))
     
     Next
     
-    .Cells(lr, 2).NumberFormatLocal = "@"
-    
     lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
     .Range("A2").Resize(lr, 8).Sort key1:=.Columns(1), order1:=xlAscending
@@ -146,9 +144,9 @@ With shtData
     If test_mode = False Then
         recDate = InputBox("新增填報日期(EX:1110316)")
     Else
-        A = Format(WorksheetFunction.RandBetween(1, 12), "00")
+        a = Format(WorksheetFunction.RandBetween(1, 12), "00")
         b = Format(WorksheetFunction.RandBetween(1, 28), "00")
-        recDate = "111" & A & b
+        recDate = "111" & a & b
     End If
     
     Set checkObj.MainRowColl = getMainRowColl
@@ -157,8 +155,8 @@ With shtData
     recCode = recDate & "-" & recObj.getCodeCount(recDate)
     .Unprotect
     .Range("B1") = recCode
-    .Range("B2") = recDate
-    .Range("B2").NumberFormatLocal = "@"
+    '.Range("B2") = recDate
+    .Range("B2") = "'" & recDate
     .Protect
 End With
 
@@ -204,7 +202,7 @@ End Sub
 Sub clearDataAll()
 
 With shtData
-
+    .Unprotect
     For i = 1 To 4
     
         sr = MainRowColl(i)
@@ -213,7 +211,7 @@ With shtData
         cnt = er - sr - 2
         
         .Range("A" & sr + 2).Resize(cnt, 1).ClearContents
-        .Range("E" & sr + 2).Resize(cnt, 1).ClearContents
+        .Range("E" & sr + 2).Resize(cnt, 2).ClearContents
     
     Next
     
@@ -222,7 +220,7 @@ With shtData
     .Range("E" & MainRowColl(5) + j).ClearContents
     
     Next
-    
+    .Protect
 End With
 
 End Sub
@@ -387,4 +385,36 @@ End With
 
 End Sub
 
+
+Sub getWorkPlaceValidation()
+
+Dim coll As New Collection
+Dim myFunc As New clsMyfunction
+Dim func As New clsFunction
+
+With Sheets("標案設定")
+
+    lr = .Cells(.Rows.Count, "D").End(xlUp).Row
+    
+    For r = 2 To lr
+
+        coll.Add CStr(.Cells(r, "D"))
+
+    Next
+
+    arr = myFunc.tranColl2Array(coll)
+
+End With
+
+With Sheets("日報填寫")
+
+    .Unprotect
+
+    Call func.data_validation_from_array(.Range("B3"), arr)
+
+    .Protect
+
+End With
+
+End Sub
 

@@ -163,7 +163,7 @@ Set coll = recObj.getSameCode
 
 For Each it In coll
 
-    tmp = Split(it, "-")
+    tmp = split(it, "-")
     
     If strDate = tmp(0) Then cnt = cnt + 1
 
