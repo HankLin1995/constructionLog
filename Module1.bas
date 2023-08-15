@@ -2,6 +2,23 @@ Attribute VB_Name = "Module1"
 '1.CheckIfSigned
 '2.CheckPASS
 
+Sub checkSubOnAction()
+
+For Each sht In Sheets
+
+    For Each shp In sht.Shapes
+    
+        If shp.OnAction <> "" Then
+        
+            Debug.Print shp.OnAction
+        
+        End If
+    
+    Next
+
+Next
+
+End Sub
 
 
 Function getSumByItemName(ByVal item_name_key As String, ByVal report_date As Date)

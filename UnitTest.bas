@@ -99,6 +99,8 @@ Sub test_refreshDB()
 Dim o As New clsPCCES
 o.RefreshDB
 
+Sheets("«´¬ù¸Ô²Óªí").Activate
+
 End Sub
 
 Sub test_checkDate()

@@ -322,6 +322,8 @@ obj.checkIsRepeat
 obj.RefreshDB
 obj.setValidation
 
+Sheets("«´¬ù¸Ô²Óªí").Activate
+
 End Sub
 
 Sub showSearchForm()

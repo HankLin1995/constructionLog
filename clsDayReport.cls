@@ -224,6 +224,8 @@ With Sheets(dataObj.getDB_name(5))
 
     Set rng = .Columns("A").Find(recCode)
     
+    If rng Is Nothing Then Exit Function
+    
     sr = rng.Row
     lr = .Cells(.Rows.Count, 1).End(xlUp).Row
     

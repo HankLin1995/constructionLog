@@ -123,9 +123,9 @@ For r = 2 To lr
             End If
             
             .Unprotect
-        
-            .Cells(rr + 1, 1) = mydata
+            
             .Cells(rr + 1, 1).WrapText = False
+            .Cells(rr + 1, 1) = mydata
         
             .Protect
         

@@ -17,7 +17,7 @@ Attribute VB_Exposed = False
 
 Private Sub CommandButton1_Click()
 
-If Me.Label1.caption = "問卷調查" Then
+If Me.Label1.Caption = "問卷調查" Then
 
 ERRORForm.Show
 Unload Me
