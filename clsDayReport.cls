@@ -37,7 +37,7 @@ er = myfun.tranDate(EndDate) - workDate + 1
 
 End Sub
 
-Function getCodes(ByVal myDate As Date)
+Function getCodes(ByVal mydate As Date)
 
 Dim coll As New Collection
 
@@ -50,7 +50,7 @@ For r = 2 To lr
     recCode = .Cells(r, 1)
     recNote = .Cells(r, 8)
     recDate = myfun.tranDate(.Cells(r, 2))
-    If myDate = recDate And recNote = "" Then
+    If mydate = recDate And recNote = "" Then
     
         On Error Resume Next
         
@@ -343,13 +343,13 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
-    myDate = myfun.tranDate(.Cells(r, 2))
+    mydate = myfun.tranDate(.Cells(r, 2))
     myItem_key = .Cells(r, 4)
     myItem = .Cells(r, 5)
     myAmount = .Cells(r, 7)
     mynote = .Cells(r, 8)
     
-    If myDate <= recDate And mynote = "" Then
+    If mydate <= recDate And mynote = "" Then
     
         If recItem = myItem_key & ">" & myItem Then
         
@@ -374,13 +374,13 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 For r = 2 To lr
 
     myCode = .Cells(r, 1)
-    myDate = myfun.tranDate(.Cells(r, 2))
+    mydate = myfun.tranDate(.Cells(r, 2))
     myItem_key = .Cells(r, 4)
     myItem = .Cells(r, 5)
     myAmount = .Cells(r, 7)
     mynote = .Cells(r, 8)
     
-    If recDate = myDate And mynote = "" Then
+    If recDate = mydate And mynote = "" Then
     
         If recItem = myItem_key & ">" & myItem Then
 
@@ -405,7 +405,7 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 For r = 2 To lr
 
     myCode = .Cells(r, 1)
-    myDate = myfun.tranDate(.Cells(r, 2))
+    mydate = myfun.tranDate(.Cells(r, 2))
     myItem_key = .Cells(r, 4)
     myItem = .Cells(r, 5)
     myAmount = .Cells(r, 7)
@@ -542,7 +542,7 @@ End With
 
 End Sub
 
-Function getUsedItemByDate(ByVal myCode As String, ByVal myDate As Date, ByVal mode As Byte) ', ByVal mycode As String) '演算先取得項目
+Function getUsedItemByDate(ByVal myCode As String, ByVal mydate As Date, ByVal mode As Byte) ', ByVal mycode As String) '演算先取得項目
     
 Dim coll_item As New Collection
 
@@ -561,7 +561,7 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         'If print_mode = 2 Or print_mode = 3 Then '累計
         If print_mode = 1 Or print_mode = 2 Or print_mode = 3 Then '累計
         
-            If myfun.tranDate(recDate) <= myDate And recNote = "" Then
+            If myfun.tranDate(recDate) <= mydate And recNote = "" Then
         
                 recKey = recNum & ">" & recItem
             

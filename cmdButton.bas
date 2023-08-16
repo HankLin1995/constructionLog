@@ -535,7 +535,7 @@ With Sheets("天氣設定")
     
     For r = 2 To lr
     
-        myDate = .Cells(r, 1)
+        mydate = .Cells(r, 1)
         myProg = .Cells(r, 4)
         
         If myProg <> "" Then

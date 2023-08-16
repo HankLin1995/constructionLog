@@ -25,11 +25,11 @@ If Len(mydatestr) <> 7 Then GoTo ERRORHANDLE
 
 Y = mid(mydatestr, 1, 3)
 M = mid(mydatestr, 4, 2)
-d = mid(mydatestr, 6, 2)
+D = mid(mydatestr, 6, 2)
 
 On Error GoTo ERRORHANDLE:
 
-a = CDate(1911 + Y & "/" & M & "/" & d)
+a = CDate(1911 + Y & "/" & M & "/" & D)
 
 Exit Function
 
@@ -69,9 +69,9 @@ For Each it In coll
 
     tmp = split(it, "-")(0)
     
-    myDate = funObj.tranDate(tmp)
+    mydate = funObj.tranDate(tmp)
 
-    If myDate >= sDate And myDate <= eDate Then Exit Sub
+    If mydate >= sDate And mydate <= eDate Then Exit Sub
 
 Next
 

@@ -34,9 +34,21 @@ Function tranDate(ByVal mydatestr) As Date
 
 Y = mid(mydatestr, 1, 3)
 M = mid(mydatestr, 4, 2)
-d = mid(mydatestr, 6, 2)
+D = mid(mydatestr, 6, 2)
 
-tranDate = CDate(1911 + Y & "/" & M & "/" & d)
+tranDate = CDate(1911 + Y & "/" & M & "/" & D)
+
+End Function
+
+Function tranZHDate(ByVal mydate As Date) As String
+
+tmp = split(mydate, "/")
+
+Y = tmp(0) - 1911
+M = Format(tmp(1), "00")
+D = Format(tmp(2), "00")
+
+tranZHDate = Y & M & D
 
 End Function
 

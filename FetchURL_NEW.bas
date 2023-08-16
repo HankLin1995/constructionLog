@@ -41,7 +41,7 @@ If s1 = "" Then Exit Sub
 
 tmp = split(s1, ":")
 
-frmMSG.Label1.caption = tmp(0) ' caption
+frmMSG.Label1.Caption = tmp(0) ' caption
 frmMSG.TextBox1.Value = tmp(1) ' s1
 frmMSG.Show
 

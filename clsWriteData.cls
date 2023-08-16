@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Private checkObj As New clsCheck
 Private recObj As New clsRecord
+Private func As New clsFunction
 
 Private shtData As Object
 Private shtDB As Object
@@ -142,7 +143,8 @@ Sub getInformation()
 With shtData
     
     If test_mode = False Then
-        recDate = InputBox("新增填報日期(EX:1110316)")
+        recDate = CDate(InputBox("新增填報日期(EX:2023/8/15)", , Format(Now(), "yyyy/mm/dd")))
+        recDate = func.tranZHDate(recDate)
     Else
         a = Format(WorksheetFunction.RandBetween(1, 12), "00")
         b = Format(WorksheetFunction.RandBetween(1, 28), "00")
@@ -411,6 +413,7 @@ With Sheets("日報填寫")
     .Unprotect
 
     Call func.data_validation_from_array(.Range("B3"), arr)
+    .Range("B3") = Sheets("標案設定").Range("D2")
 
     .Protect
 

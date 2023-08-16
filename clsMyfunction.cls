@@ -462,9 +462,9 @@ Function tranDate(ByVal mydatestr) As Date
 
 Y = mid(mydatestr, 1, 3)
 M = mid(mydatestr, 4, 2)
-d = mid(mydatestr, 6, 2)
+D = mid(mydatestr, 6, 2)
 
-tranDate = CDate(1911 + Y & "/" & M & "/" & d)
+tranDate = CDate(1911 + Y & "/" & M & "/" & D)
 
 End Function
 
