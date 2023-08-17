@@ -182,7 +182,7 @@ For i = 1 To 4
             
             If rng Is Nothing Then
         
-            .Range("B3") = "測試地點" & Format(Now(), "MMDDHHmm")
+            .Range("B3") = "連江縣"
 
             .Cells(r + j, 1) = test_item
             .Cells(r + j, 5) = WorksheetFunction.RandBetween(1, 10)
@@ -206,11 +206,12 @@ Case "N"
     With Sheets("契約詳細表")
 
         lr = .Cells(.Rows.Count, 1).End(xlUp).Row
-        r = WorksheetFunction.RandBetween(1, lr)
+        r = WorksheetFunction.RandBetween(2, lr)
         test_item = .Range("A" & r)
+        test_amount = .Range("E" & r)
         test_note = .Range("G" & r)
         
-        If test_note = "" Then getTestItem = test_item
+        If test_note = "" And test_amount <> 1 Then getTestItem = test_item
     
     End With
     

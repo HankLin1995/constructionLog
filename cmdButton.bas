@@ -141,9 +141,19 @@ obj.SumReportAmount
 
 Set wb = Workbooks.Add
 
-obj.outputData (wb)
+If targetMode = "" Then
+
+Call obj.outputData(wb, True)
+
+Else
+
+Call obj.outputData(wb, False)
+
+End If
 
 ThisWorkbook.Sheets("¤é³ø¶ñ¼g").Activate
+
+wb.Activate
 
 End Sub
 

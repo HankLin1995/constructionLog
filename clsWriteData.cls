@@ -146,9 +146,9 @@ With shtData
         recDate = CDate(InputBox("新增填報日期(EX:2023/8/15)", , Format(Now(), "yyyy/mm/dd")))
         recDate = func.tranZHDate(recDate)
     Else
-        a = Format(WorksheetFunction.RandBetween(1, 12), "00")
+        a = Format(WorksheetFunction.RandBetween(8, 9), "00")
         b = Format(WorksheetFunction.RandBetween(1, 28), "00")
-        recDate = "111" & a & b
+        recDate = "112" & a & b
     End If
     
     Set checkObj.MainRowColl = getMainRowColl

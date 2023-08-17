@@ -22,3 +22,23 @@ Call cmdGetLongReport
 Unload Me
 
 End Sub
+
+Private Sub UserForm_Initialize()
+
+With Sheets("日報資料庫")
+
+    lr = .Cells(.Rows.Count, 2).End(xlUp).Row
+    
+    s_date = .Range("B2")
+
+    If s_date = "" Then MsgBox "目前沒有資料!", vbCritical: End
+
+    Me.tbosDate = s_date
+    
+    e_date = .Range("B" & lr)
+    Me.tboeDate = e_date
+
+End With
+
+End Sub
+

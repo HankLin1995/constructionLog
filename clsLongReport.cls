@@ -236,9 +236,17 @@ End With
 End Sub
 
 
-Sub outputData(ByVal wb As Object)
+Sub outputData(ByVal wb As Object, ByVal IsAsk As Boolean)
+
+If IsAsk = False Then
+
+cnt = 1
+
+ElseIf IsAsk = True Then
 
 cnt = InputBox("請輸入本次為第幾次估驗", , 1)
+
+End If
 
 ThisWorkbook.Activate
 ThisWorkbook.Sheets("長表格式").Copy (wb.Sheets(1))
