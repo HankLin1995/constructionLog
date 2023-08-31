@@ -263,6 +263,7 @@ For Each it In coll_L
     If r = er Then Stop
 
     .Range("A" & r) = split(it, ">")(1)
+    .Range("A" & r).WrapText = True
     .Range("C" & r) = getUsedAmountByItem(it, recCode, mode)
     .Range("E" & r) = getSumAmountByItem(it, recDate, mode)
 
@@ -396,7 +397,7 @@ End With
 
 End Function
 
-Function getUsedAmountByItem(ByVal recItem As String, ByVal recCode As String, ByVal mode As Byte) ' ByVal recDate As Date)
+Function getUsedAmountByItem(ByVal recItem As String, ByVal recCode As String, ByVal mode As Byte) As Double ' ByVal recDate As Date)
 
 With Sheets(dataObj.getDB_name(mode))
 

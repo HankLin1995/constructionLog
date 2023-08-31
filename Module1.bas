@@ -2,6 +2,53 @@ Attribute VB_Name = "Module1"
 '1.CheckIfSigned
 '2.CheckPASS
 
+Sub loadOldDatabase()
+
+Set wb = Workbooks(getWbName())
+
+'shtNameArr = Array("契約詳細表", "標案設定", "工料設定", "天氣設定", "日報資料庫", "範本資料庫", "材料資料庫", "機具資料庫", "人員資料庫", "文件資料庫")
+shtNameArr = Array("日報資料庫", "範本資料庫", "材料資料庫", "機具資料庫", "人員資料庫", "文件資料庫")
+
+For Each shtName In shtNameArr
+
+    ThisWorkbook.Sheets(shtName).Unprotect
+
+    With wb.Sheets(shtName)
+    
+        .Unprotect
+        Set rng = .Cells.SpecialCells(xlCellTypeLastCell)
+        .Range("A1").Resize(rng.Row, rng.Column).EntireRow.Copy ThisWorkbook.Sheets(shtName).Range("A1")
+        .Protect
+        
+    End With
+    
+    ThisWorkbook.Sheets(shtName).Protect
+
+Next
+
+End Sub
+
+Function getWbName()
+
+Dim coll As New Collection
+
+For Each wb In Workbooks
+
+    j = j + 1
+
+    If wb.Name <> ThisWorkbook.Name Then
+        p = p & j & "." & wb.Name & vbNewLine
+        coll.Add wb.Name
+    End If
+
+Next
+
+mode = InputBox("請選擇匯入之檔案名稱:" & vbNewLine & p, , "1")
+
+getWbName = coll(CInt(mode))
+
+End Function
+
 Sub checkSubOnAction()
 
 For Each sht In Sheets
@@ -42,7 +89,7 @@ With Sheets("日報資料庫")
 
     For Each r In coll_rows
     
-        If .Cells(r, "D") = tmp(0) Then
+        If .Cells(r, "D") = tmp(0) And .Cells(r, "B") <> "" Then
             
             rec_date = func.tranDate(.Cells(r, "B"))
             rec_note = .Cells(r, "H")

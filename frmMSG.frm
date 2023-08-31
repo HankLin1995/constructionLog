@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Private Sub CommandButton1_Click()
 
 If Me.Label1.Caption = "°Ý¨÷½Õ¬d" Then
