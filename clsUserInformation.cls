@@ -77,6 +77,8 @@ End Function
 
 Sub hideCmd()
 
+On Error Resume Next
+
 With Sheets("日報填寫")
 
     For Each shp In .Shapes
@@ -100,6 +102,8 @@ End With
 End Sub
 
 Sub showCmd()
+
+On Error Resume Next
 
 With Sheets("日報填寫")
 

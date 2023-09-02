@@ -146,7 +146,7 @@ For i = 1 To 2
         
         .Rows(r).Hidden = False
         
-        If .Cells(r, "H") = "" Then .Rows(r).Hidden = True
+        If .Cells(r, "H") = 0 Then .Rows(r).Hidden = True
     
     Next
 
