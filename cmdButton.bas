@@ -467,7 +467,7 @@ With Sheets("天氣設定")
                     r2 = split(collProg(i), ":")(0)
                     p2 = split(collProg(i), ":")(1)
                     
-                    newProg = Round(((r2 - r) * p1 + (r - r1) * p2) / (r2 - r1), 2)
+                    newProg = Round(((r2 - r) * p1 + (r - r1) * p2) / (r2 - r1), 4)
                     
                     Exit For
                 
