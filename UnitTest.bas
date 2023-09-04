@@ -96,6 +96,10 @@ End Sub
 
 Sub test_refreshDB()
 
+msg = MsgBox("確定要將資料庫清除?", vbYesNo + vbDefaultButton2 + vbInformation)
+
+If msg = vbNo Then Exit Sub
+
 Dim o As New clsPCCES
 o.RefreshDB
 

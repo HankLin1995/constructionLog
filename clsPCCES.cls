@@ -189,18 +189,26 @@ Sub RefreshDB()
 
 With Sheets("長表格式")
 
+.Unprotect
+
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 lc = .Cells(1, .Columns.Count).End(xlToLeft).Column
 
 .Range("A4").Resize(lr, lc).ClearContents
 .Range("F1").Resize(3, lc).ClearContents
 
+.Protect
+
 End With
 
 With Sheets("範本資料庫")
 
+.Unprotect
+
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 .Range("A2").Resize(lr, 8).ClearContents
+
+.Protect
 
 End With
 
