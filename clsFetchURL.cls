@@ -130,7 +130,7 @@ myURL = CreateURL("3", id, password, "wg", "123", "123")
 tmp = split(ExecHTTP(myURL), ":")
 
 If tmp(0) <> "Pass" Then
-    MsgBox "驗證失敗!!", vbCritical: ThisWorkbook.Close SaveChanges:=False
+    MsgBox "驗證失敗!!", vbCritical: ThisWorkbook.Close savechanges:=False
 Else
     'Application.StatusBar = "設計者：林宗漢(Hank Lin) @2021," & tmp(3) & "使用者：" & tmp(2)
     frm_login.Label6 = "Pass"

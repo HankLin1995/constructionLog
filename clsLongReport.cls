@@ -13,7 +13,7 @@ Public print_mode As Byte
 
 Private recObj As New clsRecord
 Private checkObj As New clsCheck
-Private myfun As New clsFunction
+Private myFun As New clsFunction
 Private writeObj As New clsWriteData
 
 Function getCollRowByKey()
@@ -136,13 +136,13 @@ Call checkObj.checkIsValidDate(StartDate)
 'EndDate = Val(InputBox("結束日期(EX:1110131)", , "1110131"))
 Call checkObj.checkIsValidDate(EndDate)
 
-Call checkObj.checkUseDays(myfun.tranDate(StartDate), myfun.tranDate(EndDate))
-Call checkObj.checkIsHaveDataInDates(myfun.tranDate(StartDate), myfun.tranDate(EndDate))
+Call checkObj.checkUseDays(myFun.tranDate(StartDate), myFun.tranDate(EndDate))
+Call checkObj.checkIsHaveDataInDates(myFun.tranDate(StartDate), myFun.tranDate(EndDate))
 
 'workDate = Sheets("標案資料").Range("B3")
 
-sDate = myfun.tranDate(StartDate)
-eDate = myfun.tranDate(EndDate)
+sDate = myFun.tranDate(StartDate)
+eDate = myFun.tranDate(EndDate)
 
 Set getIntervalCodes = recObj.getSameCodeByDates(sDate, eDate)
 
@@ -160,7 +160,7 @@ With Sheets("長表格式")
 
         c = 6 + i
         .Cells(1, c) = code
-        .Cells(2, c) = myfun.tranDate(split(code, "-")(0))
+        .Cells(2, c) = myFun.tranDate(split(code, "-")(0))
         .Cells(3, c) = recObj.getRecLoc(code)
         
         Call KeyInLongItems(code, c, coll_row)

@@ -33,7 +33,7 @@ End Sub
 
 Private Sub Class_Terminate(): shtData.Protect: End Sub
 
-Sub readData()
+Sub ReadData()
 
 Call recObj.dealExistData(recCode)
 
@@ -339,7 +339,7 @@ End Function
 
 Sub setValidation() 'for 文件資料
 
-Dim myfun As New clsFunction
+Dim myFun As New clsFunction
 
 Set coll = getMainRowColl
 
@@ -355,7 +355,7 @@ With Sheets("日報填寫")
         region = Array("□有 □無", "■有 □無", "□有 ■無")
         If j = 4 Then region = Array("□有 □■無 □無新進勞工", "■有 □無 □無新進勞工", "□有 □無 ■無新進勞工")
     
-        Call myfun.data_validation_from_array(rng, region)
+        Call myFun.data_validation_from_array(rng, region)
 
     Next
 

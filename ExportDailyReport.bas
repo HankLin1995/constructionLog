@@ -1,0 +1,152 @@
+Attribute VB_Name = "ExportDailyReport"
+'todo:
+'1.取得該日內容
+'2.依照該日內容組成日報數量格式
+
+'by result
+
+Sub cmdExportToDayReports()
+
+'getResultWorkbook
+Set wb = getResultWorkbook() 'ThisWorkbook.Path & "\第二階段\results.xls") ' Workbooks("Results.xls")
+
+Set wb_new = Workbooks.Add
+
+For Each sht In wb.Sheets
+
+    With sht
+        
+        rec_money = .Range("N1")
+        rec_date = .Range("K3")
+        weather_u = .Range("C3")
+        weather_d = .Range("E3")
+        con_name = .Range("D4")
+        work_day = .Range("B6")
+        work_day_extend = .Range("L5")
+        work_day_start = .Range("D6")
+        work_day_end = .Range("K6")
+        pgs_design = .Range("D7")
+        pgs_real = .Range("K7")
+        items_str = getRecItemString(sht)
+        test_str = .Range("E75")
+        safe_check = .Range("H70")
+        safe_str = .Range("C73")
+        import_str = .Range("E79")
+    
+    End With
+    
+    With ThisWorkbook.Sheets("監造報表")
+
+        .Range("B2") = rec_date - work_day_start + 1
+        .Range("C3") = weather_u
+        .Range("E3") = weather_d
+        .Range("G3") = rec_date
+        .Range("B4") = con_name
+        .Range("B5") = work_day & "天"
+        .Range("D5") = work_day_start
+        .Range("F5") = work_day_end
+        .Range("B7") = pgs_design
+        .Range("F7") = pgs_real
+        .Range("A10") = items_str
+        .Range("A14") = test_str
+        .Range("A16") = getSafeCheck(safe_check)
+        .Range("A17") = "（二）其他工地安全衛生督導事項：" & safe_str
+        .Range("A19") = import_str
+        
+        '契約金額
+        .Range("H6") = "原契約:" & Format(rec_money, "#,##0")
+        '變更次數
+        '變更後契約
+        
+        Call outputData(wb_new, rec_date - work_day_start + 1)
+
+    End With
+
+Next
+
+If wb_new.Sheets.Count > 1 Then
+
+    Application.DisplayAlerts = False
+    wb_new.Sheets("工作表1").Delete
+    Application.DisplayAlerts = True
+    
+End If
+
+wb.Close False
+
+End Sub
+
+Sub outputData(ByVal wb As Workbook, ByVal code As String)
+
+    Dim lastSheet As Worksheet
+    
+    ThisWorkbook.Activate
+    ThisWorkbook.Sheets("監造報表").Copy after:=wb.Sheets(wb.Sheets.Count)
+    
+    Set lastSheet = wb.Sheets(wb.Sheets.Count)
+    
+    lastSheet.Name = code
+    lastSheet.Columns("A:H").Copy
+    lastSheet.Columns("A:H").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+    
+    Application.CutCopyMode = False
+End Sub
+
+
+Function getSafeCheck(ByVal safe_check As String)
+
+If safe_check = "■有 □無" Then
+    s = "■完成□未完成"
+Else
+    s = "□完成■未完成"
+End If
+
+getSafeCheck = "（一）施工廠商施工前檢查事項辦理情形：" & s
+
+End Function
+
+Function getRecItemString(ByVal sht)
+
+Dim coll As New Collection
+
+With sht
+
+    For r = 10 To 39
+    
+        If .Rows(r).Hidden = False Then
+            cnt = cnt + 1
+            s = cnt & ". " & .Cells(r, "A") & ":" & .Cells(r, "H") & " 累積" & .Cells(r, "J")
+        
+            coll.Add s
+        
+        End If
+    
+    Next
+
+End With
+
+For Each it In coll
+
+    p = p & it & vbCrLf
+
+Next
+
+getRecItemString = p
+
+End Function
+
+Function getResultWorkbook(Optional ByVal f As String) As Object  'Optional ByVal f As String) '取得預算書內容
+
+If f = "" Then f = Application.GetOpenFilename
+
+If f = "False" Then MsgBox "未取得檔案", vbCritical: End
+
+tmp = split(f, "\")
+
+wbname = tmp(UBound(tmp))
+
+Workbooks.Open (f)
+
+Set getResultWorkbook = Workbooks(wbname)
+
+End Function

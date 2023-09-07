@@ -96,10 +96,6 @@ End Sub
 
 Sub test_refreshDB()
 
-msg = MsgBox("確定要將資料庫清除?", vbYesNo + vbDefaultButton2 + vbInformation)
-
-If msg = vbNo Then Exit Sub
-
 Dim o As New clsPCCES
 o.RefreshDB
 
@@ -121,11 +117,11 @@ End Sub
 
 Sub test_checkIsHaveDataInDates()
 
-Dim myfun As New clsFunction
+Dim myFun As New clsFunction
 
-sd = myfun.tranDate("1110401")
+sd = myFun.tranDate("1110401")
 
-ed = myfun.tranDate("1110402")
+ed = myFun.tranDate("1110402")
 
 Dim obj As New clsCheck
 

@@ -14,7 +14,7 @@ Public print_mode As Byte
 'Private er As Integer
 
 'Private shtDReport As Object
-Private myfun As New clsFunction
+Private myFun As New clsFunction
 Private checkObj As New clsCheck
 Private dataObj As New clsWriteData
 
@@ -27,13 +27,13 @@ Call checkObj.checkIsValidDate(StartDate)
 'EndDate = Val(InputBox("結束日期(EX:1110131)", , "1110131"))
 Call checkObj.checkIsValidDate(EndDate)
 
-Call checkObj.checkUseDays(myfun.tranDate(StartDate), myfun.tranDate(EndDate))
-Call checkObj.checkIsHaveDataInDates(myfun.tranDate(StartDate), myfun.tranDate(EndDate))
+Call checkObj.checkUseDays(myFun.tranDate(StartDate), myFun.tranDate(EndDate))
+Call checkObj.checkIsHaveDataInDates(myFun.tranDate(StartDate), myFun.tranDate(EndDate))
 
 workDate = Sheets("標案設定").Range("B3")
 
-sr = myfun.tranDate(StartDate) - workDate + 1
-er = myfun.tranDate(EndDate) - workDate + 1
+sr = myFun.tranDate(StartDate) - workDate + 1
+er = myFun.tranDate(EndDate) - workDate + 1
 
 End Sub
 
@@ -49,7 +49,7 @@ For r = 2 To lr
 
     recCode = .Cells(r, 1)
     recNote = .Cells(r, 8)
-    recDate = myfun.tranDate(.Cells(r, 2))
+    recDate = myFun.tranDate(.Cells(r, 2))
     If mydate = recDate And recNote = "" Then
     
         On Error Resume Next
@@ -98,7 +98,6 @@ With sht
     'If print_mode = 1 Then Call hideEmpyNum(sht)
 
 End With
-
 
 End Sub
 
@@ -344,15 +343,15 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 For r = 2 To lr
 
-    mydate = myfun.tranDate(.Cells(r, 2))
+    mydate = myFun.tranDate(.Cells(r, 2))
     myItem_key = .Cells(r, 4)
-    myItem = .Cells(r, 5)
+    myitem = .Cells(r, 5)
     myAmount = .Cells(r, 7)
     mynote = .Cells(r, 8)
     
     If mydate <= recDate And mynote = "" Then
     
-        If recItem = myItem_key & ">" & myItem Then
+        If recItem = myItem_key & ">" & myitem Then
         
             getSumAmountByItem = getSumAmountByItem + myAmount
             
@@ -375,15 +374,15 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 For r = 2 To lr
 
     myCode = .Cells(r, 1)
-    mydate = myfun.tranDate(.Cells(r, 2))
+    mydate = myFun.tranDate(.Cells(r, 2))
     myItem_key = .Cells(r, 4)
-    myItem = .Cells(r, 5)
+    myitem = .Cells(r, 5)
     myAmount = .Cells(r, 7)
     mynote = .Cells(r, 8)
     
     If recDate = mydate And mynote = "" Then
     
-        If recItem = myItem_key & ">" & myItem Then
+        If recItem = myItem_key & ">" & myitem Then
 
             getUsedAmountByItemWithDate = getUsedAmountByItemWithDate + myAmount
             
@@ -406,15 +405,15 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 For r = 2 To lr
 
     myCode = .Cells(r, 1)
-    mydate = myfun.tranDate(.Cells(r, 2))
+    mydate = myFun.tranDate(.Cells(r, 2))
     myItem_key = .Cells(r, 4)
-    myItem = .Cells(r, 5)
+    myitem = .Cells(r, 5)
     myAmount = .Cells(r, 7)
     mynote = .Cells(r, 8)
     
         If recCode = myCode And mynote = "" Then
         
-            If recItem = myItem_key & ">" & myItem Then
+            If recItem = myItem_key & ">" & myitem Then
             
                 getUsedAmountByItem = getUsedAmountByItem + myAmount
                 
@@ -562,7 +561,7 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         'If print_mode = 2 Or print_mode = 3 Then '累計
         If print_mode = 1 Or print_mode = 2 Or print_mode = 3 Then '累計
         
-            If myfun.tranDate(recDate) <= mydate And recNote = "" Then
+            If myFun.tranDate(recDate) <= mydate And recNote = "" Then
         
                 recKey = recNum & ">" & recItem
             

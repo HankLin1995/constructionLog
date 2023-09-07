@@ -34,9 +34,8 @@ Dim coll As New Collection
 
 For Each wb In Workbooks
 
-    j = j + 1
-
     If wb.Name <> ThisWorkbook.Name Then
+        j = j + 1
         p = p & j & "." & wb.Name & vbNewLine
         coll.Add wb.Name
     End If

@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Private wbname As String
 Private wb As Object
-Private myfun As New clsFunction
+Private myFun As New clsFunction
 
 Private Sub Class_Initialize()
 
@@ -19,15 +19,15 @@ End Sub
 
 Sub getFileName() '取得預算書內容
 
-F = Application.GetOpenFilename
+f = Application.GetOpenFilename
 
-If F = "False" Then MsgBox "未取得檔案", vbCritical: End
+If f = "False" Then MsgBox "未取得檔案", vbCritical: End
 
-tmp = split(F, "\")
+tmp = split(f, "\")
 
 wbname = tmp(UBound(tmp))
 
-Workbooks.Open (F)
+Workbooks.Open (f)
 
 Set wb = Workbooks(wbname)
 
@@ -79,7 +79,7 @@ With wb.Sheets(getShtContentName)
     
     For r = 9 To lr
     
-        item_num = myfun.tranCharcter_NUM(.Cells(r, 1))
+        item_num = myFun.tranCharcter_NUM(.Cells(r, 1))
         item_cont = .Cells(r, 2)
         item_unit = .Cells(r, 3)
         item_amount = .Cells(r, 4)
@@ -111,7 +111,7 @@ With wb.Sheets(getShtContentName)
 
     If .Cells(r + 1, "F") <> "" Then
     
-        getFullName = myfun.tranCharcter(.Cells(r, "B"))
+        getFullName = myFun.tranCharcter(.Cells(r, "B"))
         
     Else
     
@@ -119,7 +119,7 @@ With wb.Sheets(getShtContentName)
         
         For rr = r To lr - 1
         
-            s = s & myfun.tranCharcter(.Cells(rr, "B"))
+            s = s & myFun.tranCharcter(.Cells(rr, "B"))
             cnt = cnt + 1
         
         Next

@@ -256,7 +256,7 @@ obj.readInformation
 
 Call checkObj.checkInformation(obj.recCode)
 
-obj.readData
+obj.ReadData
 
 obj.clearInformation
 obj.clearDataAll

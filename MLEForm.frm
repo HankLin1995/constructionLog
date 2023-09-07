@@ -20,7 +20,7 @@ Private Sub cmdAdd_Click()
 
 Dim MLEobj As New clsMLE
 
-Call MLEobj.readData
+Call MLEobj.ReadData
 Call MLEobj.sortData
 
 Call MLEobj.setValidation_MLE
