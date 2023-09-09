@@ -89,7 +89,7 @@ Set sht = wb.Sheets(1)
 With sht
     
     .Name = code
-    .Columns("A:M").Select
+    .Columns("A:N").Select
     '.Range("A7").Activate
     Selection.Copy
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _

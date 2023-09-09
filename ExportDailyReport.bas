@@ -115,7 +115,13 @@ With sht
     
         If .Rows(r).Hidden = False Then
             cnt = cnt + 1
-            s = cnt & ". " & .Cells(r, "A") & ":" & .Cells(r, "H") & " 累積" & .Cells(r, "J")
+            item_name = .Cells(r, "A")
+            num_all = .Cells(r, "F")
+            num_today = .Cells(r, "H")
+            num_sum = .Cells(r, "J")
+            
+            s = cnt & ". " & item_name & ":" & Round(num_today / num_all, 2) & "% 累積" & Round(num_sum / num_all, 2) & "%"
+            's = cnt & ". " & .Cells(r, "A") & ":" & .Cells(r, "H") & " 累積" & .Cells(r, "J")
         
             coll.Add s
         
@@ -136,6 +142,8 @@ getRecItemString = p
 End Function
 
 Function getResultWorkbook(Optional ByVal f As String) As Object  'Optional ByVal f As String) '取得預算書內容
+
+MsgBox "請先選取施工日誌的第一聯日報檔案!", vbInformation
 
 If f = "" Then f = Application.GetOpenFilename
 
