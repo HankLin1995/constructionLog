@@ -1,4 +1,14 @@
 Attribute VB_Name = "UnitTest"
+
+Sub test_getContractMoneyByKeyItem()
+
+s = "4>利潤、保險及管理費5%"
+Debug.Assert getContractMoneyByKeyItem(s) = 754642
+s = "5>工程執行營業稅5%"
+Debug.Assert getContractMoneyByKeyItem(s) = 801430
+
+End Sub
+
 Sub test_getDataByDate_second()
 
 Dim o As New clsDayReport

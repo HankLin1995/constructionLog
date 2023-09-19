@@ -427,7 +427,6 @@ End With
 
 End Function
 
-
 Function getUnitByItem(ByVal recItem, ByVal mode As Byte)
 
 shtName = "工料設定"
@@ -733,10 +732,3 @@ End With
 
 End Sub
 
-Private Sub Class_Initialize()
-
-End Sub
-
-Private Sub Class_Terminate()
-
-End Sub

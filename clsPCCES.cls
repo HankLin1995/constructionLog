@@ -254,7 +254,43 @@ Next
 
 End With
 
+With Sheets("標案設定")
+
+    lr = .Cells(.Rows.Count, "F").End(xlUp).Row
+
+    For r = 2 To lr
+    
+        getSumMoney = getSumMoney - getContractMoneyByKeyItem(.Cells(r, "F"))
+    
+    Next
+
+End With
+
 End Function
+
+
+Function getContractMoneyByKeyItem(ByVal s As String) As Double
+
+With Sheets("契約詳細表")
+
+Set rng = .Columns("A").Find(s)
+
+If rng Is Nothing Then
+    
+    MsgBox "契約詳細表中找不到" & s & "!"
+
+Else
+
+    num = rng.Offset(0, 4)
+    cost = rng.Offset(0, 5)
+    getContractMoneyByKeyItem = num * cost
+
+End If
+
+End With
+
+End Function
+
 
 Function getMoneyByItemKey(ByVal item_key)
 

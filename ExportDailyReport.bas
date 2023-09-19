@@ -18,12 +18,13 @@ For Each sht In wb.Sheets
 
     With sht
         
+        rec_code = .Range("B2")
         rec_money = .Range("N1")
         rec_date = .Range("K3")
         weather_u = .Range("C3")
         weather_d = .Range("E3")
         con_name = .Range("D4")
-        work_day = .Range("B6")
+        work_day = .Range("B5")
         work_day_extend = .Range("L5")
         work_day_start = .Range("D6")
         work_day_end = .Range("K6")
@@ -39,7 +40,7 @@ For Each sht In wb.Sheets
     
     With ThisWorkbook.Sheets("監造報表")
 
-        .Range("B2") = rec_date - work_day_start + 1
+        .Range("B2") = rec_code 'rec_date - work_day_start + 1
         .Range("C3") = weather_u
         .Range("E3") = weather_d
         .Range("G3") = rec_date
@@ -60,7 +61,7 @@ For Each sht In wb.Sheets
         '變更次數
         '變更後契約
         
-        Call outputData(wb_new, rec_date - work_day_start + 1)
+        Call outputData(wb_new, rec_code) ' rec_date - work_day_start + 1)
 
     End With
     
