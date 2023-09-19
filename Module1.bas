@@ -4,7 +4,9 @@ Attribute VB_Name = "Module1"
 
 Sub loadOldDatabase()
 
-Set wb = Workbooks(getWbName())
+MsgBox "我只會更新以下資料庫" & vbNewLine & "1.日報資料庫" & vbNewLine & "2.範本資料庫" & vbNewLine & "3.材料資料庫" & vbNewLine & "4.機具資料庫" & vbNewLine & "5.人員資料庫" & vbNewLine & "6.文件資料庫"
+
+Set wb = getImportWorkbook ' Workbooks(getWbName())
 
 'shtNameArr = Array("契約詳細表", "標案設定", "工料設定", "天氣設定", "日報資料庫", "範本資料庫", "材料資料庫", "機具資料庫", "人員資料庫", "文件資料庫")
 shtNameArr = Array("日報資料庫", "範本資料庫", "材料資料庫", "機具資料庫", "人員資料庫", "文件資料庫")
@@ -26,6 +28,8 @@ For Each shtName In shtNameArr
 
 Next
 
+wb.Close False
+
 End Sub
 
 Function getWbName()
@@ -45,6 +49,24 @@ Next
 mode = InputBox("請選擇匯入之檔案名稱:" & vbNewLine & p, , "1")
 
 getWbName = coll(CInt(mode))
+
+End Function
+
+Function getImportWorkbook(Optional ByVal f As String) As Object  'Optional ByVal f As String) '取得預算書內容
+
+MsgBox "請選擇匯入之檔案名稱!", vbInformation
+
+If f = "" Then f = Application.GetOpenFilename
+
+If f = "False" Then MsgBox "未取得檔案", vbCritical: End
+
+tmp = split(f, "\")
+
+wbname = tmp(UBound(tmp))
+
+Workbooks.Open (f)
+
+Set getImportWorkbook = Workbooks(wbname)
 
 End Function
 

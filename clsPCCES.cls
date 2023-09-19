@@ -140,7 +140,7 @@ Private Sub getData(ByVal num As String, ByVal cont As String, ByVal unit As Str
         
         r = lr + 1
         
-        .Cells(r, 2) = num
+        .Cells(r, 2) = "'" & num
         .Cells(r, 3) = cont
         .Cells(r, 4) = unit
         .Cells(r, 5) = amount

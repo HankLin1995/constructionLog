@@ -73,7 +73,15 @@ For r = er To sr Step -1
 
 Next
 
-If wb.Sheets.Count > 1 Then wb.Sheets("工作表1").Delete
+Application.DisplayAlerts = False
+
+For Each sht In wb.Sheets
+    If sht.Name Like "工作表*" Then sht.Delete
+Next
+
+Application.DisplayAlerts = True
+
+'If wb.Sheets.Count > 1 Then wb.Sheets("工作表1").Delete
 
 If print_mode = 3 Or print_mode = 4 Then
 

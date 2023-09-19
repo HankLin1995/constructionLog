@@ -14,6 +14,8 @@ Set wb_new = Workbooks.Add
 
 For Each sht In wb.Sheets
 
+    If sht.Name Like "*-*" Then
+
     With sht
         
         rec_money = .Range("N1")
@@ -61,13 +63,20 @@ For Each sht In wb.Sheets
         Call outputData(wb_new, rec_date - work_day_start + 1)
 
     End With
+    
+    End If
 
 Next
 
 If wb_new.Sheets.Count > 1 Then
 
     Application.DisplayAlerts = False
-    wb_new.Sheets("工作表1").Delete
+    
+    For Each sht In wb_new.Sheets
+    'wb_new.Sheets("工作表1").Delete
+        If sht.Name Like "工作表*" Then sht.Delete
+    Next
+    
     Application.DisplayAlerts = True
     
 End If
