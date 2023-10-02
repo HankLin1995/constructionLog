@@ -265,6 +265,7 @@ For Each it In coll_L
     .Range("A" & r).WrapText = True
     .Range("C" & r) = getUsedAmountByItem(it, recCode, mode)
     .Range("E" & r) = getSumAmountByItem(it, recDate, mode)
+    .Range("A" & r & ":E" & r).Font.Name = "標楷體"
 
     r = r + 1
     
@@ -279,7 +280,8 @@ For Each it In coll_E
     .Range("H" & r) = split(it, ">")(1)
     .Range("J" & r) = getUsedAmountByItem(it, recCode, mode + 1)
     .Range("L" & r) = getSumAmountByItem(it, recDate, mode + 1)
-
+    .Range("H" & r & ":L" & r).Font.Name = "標楷體"
+    
     r = r + 1
     
 Next
@@ -305,10 +307,22 @@ For Each it In coll_item
     If r = er Then Stop
 
     .Range("A" & r) = split(it, ">")(1)
+    
+    If (Len(.Range("A" & r)) * 1.1) > 16.5 Then
+    
+    .Range("A" & r).RowHeight = Len(.Range("A" & r)) * 1.1
+    
+    Else
+    
+    .Range("A" & r).RowHeight = 16.5
+    
+    End If
+    
     .Range("E" & r) = getUnitByItem(it, mode)
     .Range("F" & r) = getAmountByItem(it, mode)
     .Range("H" & r) = getUsedAmountByItem(it, recCode, mode)
     .Range("J" & r) = getSumAmountByItem(it, recDate, mode)
+    .Range("A" & r & ":J" & r).Font.Name = "標楷體"
     
     If mode = 1 Then
     price = o.getMoneyByItemKey(it)
@@ -317,8 +331,8 @@ For Each it In coll_item
 
     End If
 
-    .Range("A" & r).WrapText = False
-    .Range("A" & r).ShrinkToFit = True
+    .Range("A" & r).WrapText = True
+    '.Range("A" & r).ShrinkToFit = True
 
     r = r + 1
     
@@ -354,6 +368,36 @@ For r = 2 To lr
         If recItem = myItem_key & ">" & myitem Then
         
             getSumAmountByItem = getSumAmountByItem + myAmount
+            
+        End If
+    
+    End If
+
+Next
+
+End With
+
+End Function
+
+Function getSumAmountByItem2(ByVal recItem As String, ByVal recDate_s As Date, ByVal recDate_e As Date, ByVal mode As Byte)
+
+With Sheets(dataObj.getDB_name(mode))
+
+lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+
+For r = 2 To lr
+
+    mydate = myFun.tranDate(.Cells(r, 2))
+    myItem_key = .Cells(r, 4)
+    myitem = .Cells(r, 5)
+    myAmount = .Cells(r, 7)
+    mynote = .Cells(r, 8)
+    
+    If mydate <= recDate_e And mydate >= recDate_s And mynote = "" Then
+    
+        If recItem = myItem_key & ">" & myitem Then
+        
+            getSumAmountByItem2 = getSumAmountByItem2 + myAmount
             
         End If
     
@@ -642,7 +686,7 @@ End With
 
 End Function
 
-Sub getDataByDate_second(ByVal recDate As Date, ByVal recCode As String)
+Sub getDataByDate_second(ByVal recDate_s As Date, ByVal recDate_e As Date, ByVal recCode As String)
 
 Dim o As New clsPCCES
 
@@ -674,7 +718,7 @@ With Sheets("日報第二聯")
 
     .Range("K3") = recDate
 
-    r = 6
+    r = 8
     
     mode = 1
     
@@ -684,12 +728,17 @@ With Sheets("日報第二聯")
         .Range("B" & r) = split(it, ">")(1)
         .Range("G" & r) = getUnitByItem(it, mode)
         .Range("H" & r) = getAmountByItem(it, mode)
-        .Range("I" & r) = getUsedAmountByItemWithDate(it, recDate, mode)
-        .Range("K" & r) = getSumAmountByItem(it, recDate, mode)
+        '.Range("I" & r) = getUsedAmountByItemWithDate(it, recDate, mode)
+        .Range("I" & r) = getSumAmountByItem2(it, recDate_s, recDate_e, mode)
         
         price = o.getMoneyByItemKey(it)
+        
+        .Range("J" & r) = price
+        
         amount = .Range("K" & r)
         use_money = use_money + price * amount
+        
+        .Range("K" & r) = .Range("I" & r) * .Range("J" & r)
         
         r = r + 1
 
@@ -708,9 +757,11 @@ End Sub
 
 Sub checkRows(ByVal item_count)
 
-With Sheets("日報第二聯")
+With ThisWorkbook.Sheets("日報第二聯")
 
-    sr = 6
+    .Activate
+
+    sr = 8
     
     Set rng = .Cells.Find("完成百分率(註2)：本週完成")
     er = rng.Row
