@@ -63,7 +63,7 @@ For r = er To sr Step -1
         
         ElseIf print_mode = 3 Or print_mode = 4 Then
         
-            Call obj.getDataByDate_second(obj.workDate + r - 1, code)
+            'Call obj.getDataByDate_second(obj.workDate + r - 1, code)
         
         End If
         

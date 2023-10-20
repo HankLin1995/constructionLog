@@ -175,7 +175,7 @@ End Function
 
 Sub getDatabyCode(ByVal myCode) '¬d¸ß
 
-For i = 1 To 4
+For i = 1 To 5
 
     With Sheets(dataObj.getDB_name(i)) 'shtRec
     
@@ -198,7 +198,7 @@ For i = 1 To 4
                 If recNote = "" Then
             
                     arr = Array(myCode, recDate, recLoc, recNum, recItem, recUnit, recAmount)
-            
+
                     Call dataObj.reverseData(arr, i)
             
                 End If

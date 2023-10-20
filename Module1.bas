@@ -2,6 +2,32 @@ Attribute VB_Name = "Module1"
 '1.CheckIfSigned
 '2.CheckPASS
 
+Sub exportFinal()
+
+DayReportForm.tbosDate = DayReportForm.tboeDate
+DayReportForm.Show
+Call cmdGetDayReport
+End Sub
+
+Sub exportFullItems()
+
+Dim f As New clsMyfunction
+Dim o As New clsDayReport
+
+o.print_mode = 4
+
+lr = Sheets("日報資料庫").Cells(Sheets("日報資料庫").Rows.Count, "A").End(xlUp).Row
+
+recDate_s = CDate(InputBox("請輸入起始日期", , f.tranDate(Sheets("日報資料庫").Range("B2"))))
+recDate_e = CDate(InputBox("請輸入結束日期", , f.tranDate(Sheets("日報資料庫").Range("B" & lr))))
+
+Set wb = Workbooks.Add
+
+Call o.getDataByDate_second(recDate_s, recDate_e, recDate_e & "-1")
+Call o.outputData(wb, "TEST")
+
+End Sub
+
 Sub loadOldDatabase()
 
 MsgBox "我只會更新以下資料庫" & vbNewLine & "1.日報資料庫" & vbNewLine & "2.範本資料庫" & vbNewLine & "3.材料資料庫" & vbNewLine & "4.機具資料庫" & vbNewLine & "5.人員資料庫" & vbNewLine & "6.文件資料庫"

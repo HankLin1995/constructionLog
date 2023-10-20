@@ -250,6 +250,26 @@ With shtData
     
     myMainRow = MainRowColl(i)
     
+    If i = 5 Then
+    
+        Select Case arr(3)
+        
+        Case "P0001": .Cells(myMainRow + 2, "E") = arr(6)
+        Case "P0002": .Cells(myMainRow + 3, "E") = arr(6)
+        Case "P0003": .Cells(myMainRow + 4, "E") = arr(6)
+        Case "P0004": .Cells(myMainRow + 5, "E") = arr(6)
+        Case "P0005": .Cells(myMainRow + 6, "E") = arr(6)
+        Case "P0006": .Cells(myMainRow + 7, "E") = arr(6)
+        Case "P0007": .Cells(myMainRow + 8, "E") = arr(6)
+        Case "P0008": .Cells(myMainRow + 9, "E") = arr(6)
+        
+        End Select
+    
+        Exit Sub
+    
+    End If
+
+
     lr = .Cells(myMainRow, 1).End(xlDown).Row
     'lr = .Cells(.Rows.Count, 1).End(xlUp).Row
     

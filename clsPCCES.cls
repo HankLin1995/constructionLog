@@ -309,7 +309,7 @@ Function getAllItems()
 
 Dim coll As New Collection
 
-With Sheets("契約詳細表")
+With ThisWorkbook.Sheets("契約詳細表")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 

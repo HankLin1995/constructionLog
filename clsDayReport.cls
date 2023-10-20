@@ -714,7 +714,7 @@ End If
 
 Call checkRows(coll.Count)
 
-With Sheets("日報第二聯")
+With ThisWorkbook.Sheets("日報第二聯")
 
     .Range("K3") = recDate
 
@@ -746,7 +746,7 @@ With Sheets("日報第二聯")
     
     progress = use_money / o.getSumMoney
     
-    Set rng = .Cells.Find("完成百分率(註2)：本週完成")
+    Set rng = .Cells.Find("完成百分率(註2)：")
     er = rng.Row
     
     .Range("K" & er) = progress
@@ -763,7 +763,7 @@ With ThisWorkbook.Sheets("日報第二聯")
 
     sr = 8
     
-    Set rng = .Cells.Find("完成百分率(註2)：本週完成")
+    Set rng = .Cells.Find("完成百分率(註2)：")
     er = rng.Row
 
     .Range("A" & sr & ":M" & er - 1).ClearContents
