@@ -4,7 +4,7 @@ Sub test_SplitMultipleParenthesesStrings()
 Dim secondString As String
 Dim outsideString As String
 
-myString = "1、消防改管及配電  2、輕隔間封板 3、機電拉線 4、天花油漆噴塗前置作業[4、電氣工程施工查驗<合格>]"
+myString = "1、消防改管及配電  2、輕隔間封板 3、機電拉線 [4、天花油漆噴塗前置作業][5、電氣工程施工查驗<合格>]"
 
 Call SplitAndCombineParenthesesStrings(myString, secondString, outsideString)
 
@@ -64,6 +64,8 @@ Sub SplitAndCombineParenthesesStrings(ByVal originalString As String, ByRef seco
     ' Output all contents within parentheses and the combined outside string
     For i = 1 To UBound(parenthesisContents) - 1
     
+        secondString_ori = secondString_ori & "$" & parenthesisContents(i)
+    
         tmp = split(parenthesisContents(i), "、")
     
         'Debug.Print "第二項:" & i & "、" & tmp(1) 'parenthesisContents(i)
@@ -72,7 +74,10 @@ Sub SplitAndCombineParenthesesStrings(ByVal originalString As String, ByRef seco
         
     Next i
     
+    secondString = secondString & ";" & mid(secondString_ori, 2)
+    
     Debug.Print "第二項:" & secondString
+    'Debug.Print secondString_ori
     Debug.Print "其他: " & outsideString
     
 End Sub

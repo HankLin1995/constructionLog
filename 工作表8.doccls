@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Private Sub Worksheet_Change(ByVal Target As Range)
 
+
 If Target.Column = 1 And Target.Text <> "" Then
 
     Dim func As New clsFunction
@@ -47,6 +48,19 @@ If Target.Column = 1 And Target.Text <> "" Then
     End If
 
 End If
+
+If Target.Address = "$E$164" Then
+
+    If Target.Value Like "*;*" Then
+        MsgBox "含有非法字串【;】，這樣不好!", vbCritical
+        Target.Value = Replace(Target.Value, ";", "")
+    ElseIf Target.Value Like "*$*" Then
+        MsgBox "含有非法字串【$】，這樣不好!", vbCritical
+        Target.Value = Replace(Target.Value, "$", "")
+    End If
+
+End If
+
 
 End Sub
 

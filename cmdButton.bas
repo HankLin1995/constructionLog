@@ -214,7 +214,11 @@ recObj.getDatabyCode (myCode)
 Dim pccesObj As New clsPCCES
 
 pccesObj.setValidation
-obj.getWorkPlaceValidation
+
+Dim MLEobj As New clsMLE
+MLEobj.setValidation_MLE
+
+'obj.getWorkPlaceValidation
 '
 'For i = 1 To 5
 '    Call obj.hideRng(i, False, True)

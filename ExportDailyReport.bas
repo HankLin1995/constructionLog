@@ -37,13 +37,22 @@ For Each sht In wb.Sheets
         
         test_to_second_str = .Range("E75").Comment.Text
         
+        tmp = split(test_to_second_str, ";")
+        test_to_second_str = tmp(0)
+        tmp2 = split(tmp(1), "$")
+        
         Else
         
         test_to_second_str = ""
         
         End If
         
-        test_str = Replace(.Range("E75"), test_to_second_str, "")
+       
+        For i = LBound(tmp2) To UBound(tmp2)
+        
+            test_str = Replace(test_str, tmp2(i), "")
+        
+        Next
         
         safe_check = .Range("H70")
         safe_str = .Range("C73")
