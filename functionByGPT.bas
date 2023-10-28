@@ -1,17 +1,20 @@
 Attribute VB_Name = "functionByGPT"
 Sub test_SplitMultipleParenthesesStrings()
 
+Dim secondString As String
+Dim outsideString As String
+
 myString = "1、消防改管及配電  2、輕隔間封板 3、機電拉線 4、天花油漆噴塗前置作業[4、電氣工程施工查驗<合格>]"
 
-Call SplitAndCombineParenthesesStrings(myString)
+Call SplitAndCombineParenthesesStrings(myString, secondString, outsideString)
 
 End Sub
 
-Sub SplitAndCombineParenthesesStrings(ByVal originalString As String)
+Sub SplitAndCombineParenthesesStrings(ByVal originalString As String, ByRef secondString As String, ByRef outsideString As String)
     Dim leftParenthesisPosition As Integer
     Dim rightParenthesisPosition As Integer
     Dim subString As String
-    Dim outsideString As String
+    'Dim outsideString As String
     Dim parenthesisContents() As String
     Dim i As Integer
     
@@ -71,6 +74,22 @@ Sub SplitAndCombineParenthesesStrings(ByVal originalString As String)
     
     Debug.Print "第二項:" & secondString
     Debug.Print "其他: " & outsideString
+    
+End Sub
+
+Sub AddCommentToCell(ByVal TargetCell As Range, ByVal CommentText As String)
+
+    If Not TargetCell.Comment Is Nothing Then
+    
+        TargetCell.Comment.Delete
+    
+    End If
+
+    If CommentText <> "" Then
+        TargetCell.AddComment
+        TargetCell.Comment.Text Text:=CommentText
+
+    End If
     
 End Sub
 

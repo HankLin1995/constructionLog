@@ -18,6 +18,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub cmdGetDayReport_Click()
 
 Call cmdButton.cmdGetDayReport

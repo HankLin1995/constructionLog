@@ -32,6 +32,19 @@ For Each sht In wb.Sheets
         pgs_real = .Range("K7")
         items_str = getRecItemString(sht)
         test_str = .Range("E75")
+        
+        If Not .Range("E75").Comment Is Nothing Then
+        
+        test_to_second_str = .Range("E75").Comment.Text
+        
+        Else
+        
+        test_to_second_str = ""
+        
+        End If
+        
+        test_str = Replace(.Range("E75"), test_to_second_str, "")
+        
         safe_check = .Range("H70")
         safe_str = .Range("C73")
         import_str = .Range("E79")
@@ -51,6 +64,7 @@ For Each sht In wb.Sheets
         .Range("B7") = pgs_design
         .Range("F7") = pgs_real
         .Range("A10") = items_str
+        .Range("A12") = test_to_second_str
         .Range("A14") = test_str
         .Range("A16") = getSafeCheck(safe_check)
         .Range("A17") = "（二）其他工地安全衛生督導事項：" & safe_str

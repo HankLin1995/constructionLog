@@ -213,6 +213,21 @@ Call getReportSrEr(sr, er, 5)
 .Range("E" & sr + 9) = getPaperItem(recCode, "P0007")
 .Range("E" & sr + 11) = getPaperItem(recCode, "P0008")
 
+
+Dim secondString As String
+Dim outsideString As String
+
+myString = .Range("E" & sr + 7)
+
+MsgBox myString
+
+Call SplitAndCombineParenthesesStrings(myString, secondString, outsideString)
+
+.Range("E" & sr + 7) = myString ' outsideString
+Call AddCommentToCell(.Range("E" & sr + 7), secondString)
+.Range("E" & sr + 7) = Replace(.Range("E" & sr + 7), "[", "")
+.Range("E" & sr + 7) = Replace(.Range("E" & sr + 7), "]", "")
+
 End With
 
 End Sub
@@ -235,7 +250,7 @@ With Sheets(dataObj.getDB_name(5))
         recItem = .Cells(r, "G")
     
         If recPcode = pcode And recNote = "" Then
-        
+            
             getPaperItem = recItem
             Exit Function
             
