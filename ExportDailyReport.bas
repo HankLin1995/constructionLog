@@ -34,7 +34,7 @@ For Each sht In wb.Sheets
         
         r_data = .Cells.Find("六、施工取樣試驗紀錄：").Row
         
-        test_str = .Range("E" & r_data)
+        test_str = .Range("E" & r_data) '75
         
         If Not .Range("E" & r_data).Comment Is Nothing Then
         
@@ -63,9 +63,9 @@ For Each sht In wb.Sheets
 '
 '        Next
         
-        safe_check = .Range("H70")
-        safe_str = .Range("C73")
-        import_str = .Range("E79")
+        safe_check = .Range("H" & r_data - 5)
+        safe_str = .Range("C" & r_data - 2)
+        import_str = .Range("E" & r_data + 4)
     
     End With
     
@@ -153,7 +153,9 @@ Dim coll As New Collection
 
 With sht
 
-    For r = 10 To 39
+    lr = .Cells.Find("二、工地材料管理概況（含約定之重要材料使用狀況及數量等）：").Row
+
+    For r = 10 To lr - 1
     
         If .Rows(r).Hidden = False Then
             cnt = cnt + 1
