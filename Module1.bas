@@ -86,7 +86,7 @@ If f = "" Then f = Application.GetOpenFilename
 
 If f = "False" Then MsgBox "未取得檔案", vbCritical: End
 
-tmp = split(f, "\")
+tmp = Split(f, "\")
 
 wbname = tmp(UBound(tmp))
 
@@ -120,7 +120,7 @@ Function getSumByItemName(ByVal item_name_key As String, ByVal report_date As Da
 'item_name_key = "壹.1>土方工作，挖土方-"
 'report_date = Now()
 
-tmp = split(item_name_key, ">")
+tmp = Split(item_name_key, ">")
 
 item_index = tmp(0)
 item_name = tmp(1)

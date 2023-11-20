@@ -62,7 +62,7 @@ With XMLHTTP
     
     If .Status = 200 Then
     
-        tmp = split(.responsetext, "***")
+        tmp = Split(.responsetext, "***")
         
         'If UBound(tmp) <> 0 Then
         
@@ -104,7 +104,7 @@ Function checkAccessByIP()
 
 myURL = CreateURL("2", "test", "123", "wg", "123", "test")
 
-tmp = split(ExecHTTP(myURL), ":")
+tmp = Split(ExecHTTP(myURL), ":")
 
 If tmp(0) <> "Pass" Then
     MsgBox "IP驗證失敗!!請登入帳號密碼", vbCritical
@@ -127,7 +127,7 @@ Sub checkAccesByID(ByVal id As String, ByVal password As String)
 
 myURL = CreateURL("3", id, password, "wg", "123", "123")
 
-tmp = split(ExecHTTP(myURL), ":")
+tmp = Split(ExecHTTP(myURL), ":")
 
 If tmp(0) <> "Pass" Then
     MsgBox "驗證失敗!!", vbCritical: ThisWorkbook.Close savechanges:=False

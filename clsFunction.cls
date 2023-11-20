@@ -42,7 +42,7 @@ End Function
 
 Function tranZHDate(ByVal mydate As Date) As String
 
-tmp = split(mydate, "/")
+tmp = Split(mydate, "/")
 
 Y = tmp(0) - 1911
 M = Format(tmp(1), "00")

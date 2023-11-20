@@ -87,8 +87,8 @@ If print_mode = 3 Or print_mode = 4 Then
 
     For Each sht In wb.Sheets
 
-        code = split(sht.Name, "-")(0)
-        Page = split(sht.Name, "-")(1)
+        code = Split(sht.Name, "-")(0)
+        Page = Split(sht.Name, "-")(1)
         
         Application.DisplayAlerts = False
             If Page = 1 Then
@@ -470,15 +470,15 @@ With Sheets("天氣設定")
         
             For i = 1 To collProg.Count
                 
-                tmp = split(collProg(i), ":")
+                tmp = Split(collProg(i), ":")
                 
                 If r <= CInt(tmp(0)) Then
                 
-                    r1 = split(collProg(i - 1), ":")(0)
-                    p1 = split(collProg(i - 1), ":")(1)
+                    r1 = Split(collProg(i - 1), ":")(0)
+                    p1 = Split(collProg(i - 1), ":")(1)
                     
-                    r2 = split(collProg(i), ":")(0)
-                    p2 = split(collProg(i), ":")(1)
+                    r2 = Split(collProg(i), ":")(0)
+                    p2 = Split(collProg(i), ":")(1)
                     
                     newProg = Round(((r2 - r) * p1 + (r - r1) * p2) / (r2 - r1), 4)
                     

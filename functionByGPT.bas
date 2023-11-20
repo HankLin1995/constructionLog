@@ -66,7 +66,7 @@ Sub SplitAndCombineParenthesesStrings(ByVal originalString As String, ByRef seco
     
         secondString_ori = secondString_ori & "$" & parenthesisContents(i)
     
-        tmp = split(parenthesisContents(i), "¡B")
+        tmp = Split(parenthesisContents(i), "¡B")
     
         'Debug.Print "²Ä¤G¶µ:" & i & "¡B" & tmp(1) 'parenthesisContents(i)
         

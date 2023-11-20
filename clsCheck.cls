@@ -67,7 +67,7 @@ Set coll = recObj.getSameCode
 
 For Each it In coll
 
-    tmp = split(it, "-")(0)
+    tmp = Split(it, "-")(0)
     
     mydate = funObj.tranDate(tmp)
 

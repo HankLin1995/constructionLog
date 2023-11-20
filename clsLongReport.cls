@@ -160,7 +160,7 @@ With Sheets("長表格式")
 
         c = 6 + i
         .Cells(1, c) = code
-        .Cells(2, c) = myFun.tranDate(split(code, "-")(0))
+        .Cells(2, c) = myFun.tranDate(Split(code, "-")(0))
         .Cells(3, c) = recObj.getRecLoc(code)
         
         Call KeyInLongItems(code, c, coll_row)

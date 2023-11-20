@@ -31,28 +31,37 @@ For Each sht In wb.Sheets
         pgs_design = .Range("D7")
         pgs_real = .Range("K7")
         items_str = getRecItemString(sht)
-        test_str = .Range("E75")
         
-        If Not .Range("E75").Comment Is Nothing Then
+        r_data = .Cells.Find("六、施工取樣試驗紀錄：").Row
         
-        test_to_second_str = .Range("E75").Comment.Text
+        test_str = .Range("E" & r_data)
         
-        tmp = split(test_to_second_str, ";")
-        test_to_second_str = tmp(0)
-        tmp2 = split(tmp(1), "$")
+        If Not .Range("E" & r_data).Comment Is Nothing Then
         
+            test_to_second_str = .Range("E" & r_data).Comment.Text
+            
+            tmp = Split(test_to_second_str, ";")
+            test_to_second_str = tmp(0)
+            tmp2 = Split(tmp(1), "$")
+            
+            For i = LBound(tmp2) To UBound(tmp2)
+            
+                test_str = Replace(test_str, tmp2(i), "")
+            
+            Next
+            
         Else
         
-        test_to_second_str = ""
+            test_to_second_str = ""
         
         End If
         
-       
-        For i = LBound(tmp2) To UBound(tmp2)
-        
-            test_str = Replace(test_str, tmp2(i), "")
-        
-        Next
+'
+'        For i = LBound(tmp2) To UBound(tmp2)
+'
+'            test_str = Replace(test_str, tmp2(i), "")
+'
+'        Next
         
         safe_check = .Range("H70")
         safe_str = .Range("C73")
@@ -182,7 +191,7 @@ If f = "" Then f = Application.GetOpenFilename
 
 If f = "False" Then MsgBox "未取得檔案", vbCritical: End
 
-tmp = split(f, "\")
+tmp = Split(f, "\")
 
 wbname = tmp(UBound(tmp))
 

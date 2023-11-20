@@ -219,8 +219,6 @@ Dim outsideString As String
 
 myString = .Range("E" & sr + 7)
 
-MsgBox myString
-
 Call SplitAndCombineParenthesesStrings(myString, secondString, outsideString)
 
 .Range("E" & sr + 7) = myString ' outsideString
@@ -276,7 +274,7 @@ For Each it In coll_L
 
     If r = er Then Stop
 
-    .Range("A" & r) = split(it, ">")(1)
+    .Range("A" & r) = Split(it, ">")(1)
     .Range("A" & r).WrapText = True
     .Range("C" & r) = getUsedAmountByItem(it, recCode, mode)
     .Range("E" & r) = getSumAmountByItem(it, recDate, mode)
@@ -292,7 +290,7 @@ For Each it In coll_E
 
     If r = er Then Stop
 
-    .Range("H" & r) = split(it, ">")(1)
+    .Range("H" & r) = Split(it, ">")(1)
     .Range("J" & r) = getUsedAmountByItem(it, recCode, mode + 1)
     .Range("L" & r) = getSumAmountByItem(it, recDate, mode + 1)
     .Range("H" & r & ":L" & r).Font.Name = "標楷體"
@@ -321,7 +319,7 @@ For Each it In coll_item
 
     If r = er Then Stop
 
-    .Range("A" & r) = split(it, ">")(1)
+    .Range("A" & r) = Split(it, ">")(1)
     
     If (Len(.Range("A" & r)) * 1.1) > 16.5 Then
     
@@ -740,7 +738,7 @@ With ThisWorkbook.Sheets("日報第二聯")
     For Each it In coll
     
         .Range("A" & r) = getNumByItem(it, mode)
-        .Range("B" & r) = split(it, ">")(1)
+        .Range("B" & r) = Split(it, ">")(1)
         .Range("G" & r) = getUnitByItem(it, mode)
         .Range("H" & r) = getAmountByItem(it, mode)
         '.Range("I" & r) = getUsedAmountByItemWithDate(it, recDate, mode)
