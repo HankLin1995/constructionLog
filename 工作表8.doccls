@@ -9,7 +9,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Private Sub Worksheet_Change(ByVal Target As Range)
 
-
 If Target.Column = 1 And Target.Text <> "" Then
 
     Dim func As New clsFunction

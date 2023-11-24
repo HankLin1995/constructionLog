@@ -19,19 +19,24 @@ Attribute VB_Exposed = False
 
 
 
-
-
 Private Sub CommandButton1_Click()
 ERRORForm.Show
 Unload Me
 End Sub
 
+
+Private Sub CommandButton2_Click()
+'https://portaly.cc/hanksvba/support
+ActiveWorkbook.FollowHyperlink Address:="https://portaly.cc/hanksvba/support", NewWindow:=True
+
+End Sub
+
 Private Sub Image2_Click()
-ActiveWorkbook.FollowHyperlink Address:="https://hankvba.blogspot.com/2018/03/autocad-vba.html", NewWindow:=True
+ActiveWorkbook.FollowHyperlink Address:="https://hankvba.blogspot.com/2022/06/excel-vba.html", NewWindow:=True
 End Sub
 
 Private Sub Label12_Click()
-ActiveWorkbook.FollowHyperlink Address:="https://youtu.be/nH2Y0yFCZHM", NewWindow:=True
+ActiveWorkbook.FollowHyperlink Address:="https://www.youtube.com/watch?v=jCd-AbPIHV8", NewWindow:=True
 End Sub
 
 Private Sub Label14_Click()

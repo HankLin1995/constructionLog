@@ -11,6 +11,8 @@ End Sub
 
 Sub exportFullItems()
 
+MsgBox "此為進階版功能!請洽HankLin", vbInformation: End
+
 Dim f As New clsMyfunction
 Dim o As New clsDayReport
 
@@ -136,7 +138,7 @@ With Sheets("日報資料庫")
 
     For Each r In coll_rows
     
-        If .Cells(r, "D") = tmp(0) And .Cells(r, "B") <> "" Then
+        If CStr(.Cells(r, "D")) = tmp(0) And .Cells(r, "B") <> "" Then
             
             rec_date = func.tranDate(.Cells(r, "B"))
             rec_note = .Cells(r, "H")
