@@ -11,8 +11,6 @@ End Sub
 
 Sub exportFullItems()
 
-MsgBox "此為進階版功能!請洽HankLin", vbInformation: End
-
 Dim f As New clsMyfunction
 Dim o As New clsDayReport
 
