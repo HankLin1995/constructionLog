@@ -85,7 +85,9 @@ With wb.Sheets(getShtContentName)
         item_amount = .Cells(r, 4)
         item_cost = .Cells(r, 5)
         
-        If item_num <> "" And item_amount <> 0 Then
+        '列出所有項目for第三階段調整
+        
+        If item_num <> "" Then 'And item_amount <> 0 Then
         
             item_cont = getFullName(r)
         
@@ -119,10 +121,16 @@ With wb.Sheets(getShtContentName)
         
         For rr = r To lr - 1
         
+            If .Cells(rr, "F") <> "" Then
+        
             s = s & myFun.tranCharcter(.Cells(rr, "B"))
             cnt = cnt + 1
+            
+            End If
         
         Next
+    
+        If s = "" Then s = myFun.tranCharcter(.Cells(r, "B"))
     
         getFullName = s
         
