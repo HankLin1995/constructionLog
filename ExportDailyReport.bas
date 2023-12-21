@@ -7,8 +7,6 @@ Attribute VB_Name = "ExportDailyReport"
 
 Sub cmdExportToDayReports()
 
-MsgBox "此為進階版功能!請洽HankLin", vbInformation: End
-
 'getResultWorkbook
 Set wb = getResultWorkbook() 'ThisWorkbook.Path & "\第二階段\results.xls") ' Workbooks("Results.xls")
 

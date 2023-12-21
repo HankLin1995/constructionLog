@@ -40,11 +40,11 @@ Private Sub Workbook_Open()
 
 Set rng = Cells.Find("test", , -4163)
 
-Dim o As New clsUserInformation
+'Dim o As New clsUserInformation
 
-o.hideCmd
+'o.hideCmd
 
-Call FetchURL_Main
+'Call FetchURL_Main
 
 frm_Info.Show
 

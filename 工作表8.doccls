@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Private Sub Worksheet_Change(ByVal Target As Range)
 
+
 If Target.Column = 1 And Target.Text <> "" Then
 
     Dim func As New clsFunction
@@ -29,10 +30,10 @@ If Target.Column = 1 And Target.Text <> "" Then
 
         If item_name <> "" Then
 
-            .Cells(r, "F") = getSumByItemName(item_name, func.tranDate(report_date))
+            .Cells(r, "F") = Round(getSumByItemName(item_name, func.tranDate(report_date)), 3)
             .Cells(r, "F").HorizontalAlignment = xlCenter
 
-            If .Cells(r, "F") < 0 Then MsgBox "剩餘數量為負值!", vbCritical
+            If Round(.Cells(r, "F"), 3) < 0 Then MsgBox "剩餘數量為負值!", vbCritical
 
         Else
 
