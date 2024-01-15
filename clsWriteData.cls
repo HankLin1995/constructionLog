@@ -264,6 +264,10 @@ With shtData
         Case "P0008": .Cells(myMainRow + 9, "E") = arr(6)
         
         End Select
+        
+        .Range("B1") = arr(0) '重複工作
+        .Range("B2") = arr(1) '重複工作
+        .Range("B3") = arr(2) '重複工作
     
         Exit Sub
     
@@ -275,9 +279,9 @@ With shtData
     
     r = lr + 1
     
-    .Range("B1") = arr(0) '重複工作
-    .Range("B2") = arr(1) '重複工作
-    .Range("B3") = arr(2) '重複工作
+    '.Range("B1") = arr(0) '重複工作
+    '.Range("B2") = arr(1) '重複工作
+    '.Range("B3") = arr(2) '重複工作
     
     .Range("E" & r) = arr(6)
     
