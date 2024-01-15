@@ -9,7 +9,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Private Sub Worksheet_Change(ByVal Target As Range)
 
-
 If Target.Column = 1 And Target.Text <> "" Then
 
     Dim func As New clsFunction
@@ -27,6 +26,17 @@ If Target.Column = 1 And Target.Text <> "" Then
         report_date = .Range("B2")
         
         If report_date = "" Then Exit Sub
+        
+        'check是否為不計入項目
+        
+        If IsItemNotCalc(item_name) = True Then
+            MsgBox "此為不計入進度項目!!!", vbCritical
+            .Cells(r, "A") = ""
+            .Cells(r, "F") = ""
+            Exit Sub
+        Else
+
+        End If
 
         If item_name <> "" Then
 
@@ -63,6 +73,26 @@ End If
 
 
 End Sub
+
+Function IsItemNotCalc(ByVal item_name As String)
+
+With Sheets("標案設定")
+
+    Set rng = .Columns("F").Find(item_name)
+    
+    If rng Is Nothing Then
+    
+        IsItemNotCalc = False
+
+    Else
+    
+        IsItemNotCalc = True
+
+    End If
+
+End With
+
+End Function
 
 'Private Sub Worksheet_SelectionChange(ByVal Target As Range)
 '
