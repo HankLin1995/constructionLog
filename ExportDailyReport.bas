@@ -24,12 +24,12 @@ For Each sht In wb.Sheets
         weather_u = .Range("C3")
         weather_d = .Range("E3")
         con_name = .Range("D4")
-        work_day = .Range("B5")
-        work_day_extend = .Range("L5")
-        work_day_start = .Range("D6")
-        work_day_end = .Range("K6")
-        pgs_design = .Range("D7")
-        pgs_real = .Range("K7")
+        work_day = .Range("B6")
+        work_day_extend = .Range("L6")
+        work_day_start = .Range("D7")
+        work_day_end = .Range("K7")
+        pgs_design = .Range("D8")
+        pgs_real = .Range("K8")
         items_str = getRecItemString(sht)
         
         r_data = .Cells.Find("六、施工取樣試驗紀錄：").Row
@@ -139,8 +139,10 @@ Function getSafeCheck(ByVal safe_check As String)
 
 If safe_check = "■有 □無" Then
     s = "■完成□未完成"
-Else
+ElseIf safe_check = "□有 ■無" Then
     s = "□完成■未完成"
+Else
+    s = "□完成□未完成"
 End If
 
 getSafeCheck = "（一）施工廠商施工前檢查事項辦理情形：" & s
@@ -155,7 +157,7 @@ With sht
 
     lr = .Cells.Find("二、工地材料管理概況（含約定之重要材料使用狀況及數量等）：").Row
 
-    For r = 10 To lr - 1
+    For r = 10 + 1 To lr - 1
     
         If .Rows(r).Hidden = False Then
             cnt = cnt + 1

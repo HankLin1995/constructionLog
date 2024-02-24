@@ -377,7 +377,7 @@ With Sheets("日報填寫")
     
         Set rng = .Range("E" & r + j)
         region = Array("□有 □無", "■有 □無", "□有 ■無")
-        If j = 4 Then region = Array("□有 □■無 □無新進勞工", "■有 □無 □無新進勞工", "□有 □無 ■無新進勞工")
+        If j = 4 Then region = Array("□有 □■無 □無新進勞工", "■有 □無 □無新進勞工", "□有 □無 ■無新進勞工", "□有 □無 □無新進勞工")
     
         Call myFun.data_validation_from_array(rng, region)
 
