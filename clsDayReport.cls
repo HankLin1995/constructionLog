@@ -41,7 +41,8 @@ Function getCodes(ByVal mydate As Date)
 
 Dim coll As New Collection
 
-With ThisWorkbook.Sheets("日報資料庫")
+'With ThisWorkbook.Sheets("日報資料庫")
+With ThisWorkbook.Sheets("文件資料庫")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -354,7 +355,7 @@ Next
 If mode = 1 Then
 
     progress = use_money / o.getSumMoney
-    .Range("K7") = progress
+    .Range("K8") = progress
 
 End If
 
@@ -542,25 +543,36 @@ Function getReportSrEr(sr, er, ByVal mode As Byte)
 
 Dim coll As New Collection
 
+'set the target string to find in range("H2:H7") first
+
+arr = ThisWorkbook.Sheets("標案設定").Range("H2:H7")
+
 With ThisWorkbook.Sheets("日報第一聯")
 
-Set rng = .Cells.Find(what:="一、依施工計畫書執行按圖施工概況（含約定之重要施工項目及完成數量等）：")
+For i = 1 To 6
+
+Set rng = .Cells.Find(what:=arr(i, 1))
 coll.Add rng.Row
 
-Set rng = .Cells.Find(what:="二、工地材料管理概況（含約定之重要材料使用狀況及數量等）：")
-coll.Add rng.Row
+Next
 
-Set rng = .Cells.Find(what:="三、工地人員及機具管理（含約定之出工人數及機具使用情形及數量）：")
-coll.Add rng.Row
-
-Set rng = .Cells.Find(what:="四、本日施工項目是否有須依「營造業專業工程特定施工項目應置之技術士種類、比率或人數標準表」")
-coll.Add rng.Row
-
-Set rng = .Cells.Find(what:="五、工地職業安全衛生事項之督導、公共環境與安全之維護及其他工地行政事務：")
-coll.Add rng.Row
-
-Set rng = .Cells.Find(what:="六、施工取樣試驗紀錄：")
-coll.Add rng.Row
+'Set rng = .Cells.Find(what:="一、依施工計畫書執行按圖施工概況（含約定之重要施工項目及完成數量等）：")
+'coll.Add rng.Row
+'
+'Set rng = .Cells.Find(what:="二、工地材料管理概況（含約定之重要材料使用狀況及數量等）：")
+'coll.Add rng.Row
+'
+'Set rng = .Cells.Find(what:="三、工地人員及機具管理（含約定之出工人數及機具使用情形及數量）：")
+'coll.Add rng.Row
+'
+'Set rng = .Cells.Find(what:="四、本日施工項目是否有須依「營造業專業工程特定施工項目應置之技術士種類、比率或人數標準表」")
+'coll.Add rng.Row
+'
+'Set rng = .Cells.Find(what:="五、工地職業安全衛生事項之督導、公共環境與安全之維護及其他工地行政事務：")
+'coll.Add rng.Row
+'
+'Set rng = .Cells.Find(what:="六、施工取樣試驗紀錄：")
+'coll.Add rng.Row
 
 End With
 
