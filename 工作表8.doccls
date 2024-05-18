@@ -2,7 +2,7 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "¤u§@ªí8"
+Attribute VB_Name = "å·¥ä½œè¡¨8"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -18,7 +18,7 @@ If Target.Column = 1 And Target.Text <> "" Then
 
     If r > 6 And r < 108 Then
 
-        With Sheets("¤é³ø¶ñ¼g")
+        With Sheets("æ—¥å ±å¡«å¯«")
 
         .Unprotect
 
@@ -27,10 +27,10 @@ If Target.Column = 1 And Target.Text <> "" Then
         
         If report_date = "" Then Exit Sub
         
-        'check¬O§_¬°¤£­p¤J¶µ¥Ø
+        'checkæ˜¯å¦ç‚ºä¸è¨ˆå…¥é …ç›®
         
         If IsItemNotCalc(item_name) = True Then
-            MsgBox "¦¹¬°¤£­p¤J¶i«×¶µ¥Ø!!!", vbCritical
+            MsgBox "æ­¤ç‚ºä¸è¨ˆå…¥é€²åº¦é …ç›®!!!", vbCritical
             .Cells(r, "A") = ""
             .Cells(r, "F") = ""
             Exit Sub
@@ -43,7 +43,7 @@ If Target.Column = 1 And Target.Text <> "" Then
             .Cells(r, "F") = Round(getSumByItemName(item_name, func.tranDate(report_date)), 3)
             .Cells(r, "F").HorizontalAlignment = xlCenter
 
-            If Round(.Cells(r, "F"), 3) < 0 Then MsgBox "³Ñ¾l¼Æ¶q¬°­t­È!", vbCritical
+            If Round(.Cells(r, "F"), 3) < 0 Then MsgBox "å‰©é¤˜æ•¸é‡ç‚ºè² å€¼!", vbCritical
 
         Else
 
@@ -62,10 +62,10 @@ End If
 If Target.Address = "$E$164" Then
 
     If Target.Value Like "*;*" Then
-        MsgBox "§t¦³«Dªk¦r¦ê¡i;¡j¡A³o¼Ë¤£¦n!", vbCritical
+        MsgBox "å«æœ‰éæ³•å­—ä¸²ã€;ã€‘ï¼Œé€™æ¨£ä¸å¥½!", vbCritical
         Target.Value = Replace(Target.Value, ";", "")
     ElseIf Target.Value Like "*$*" Then
-        MsgBox "§t¦³«Dªk¦r¦ê¡i$¡j¡A³o¼Ë¤£¦n!", vbCritical
+        MsgBox "å«æœ‰éæ³•å­—ä¸²ã€$ã€‘ï¼Œé€™æ¨£ä¸å¥½!", vbCritical
         Target.Value = Replace(Target.Value, "$", "")
     End If
 
@@ -76,7 +76,7 @@ End Sub
 
 Function IsItemNotCalc(ByVal item_name As String)
 
-With Sheets("¼Ğ®×³]©w")
+With Sheets("æ¨™æ¡ˆè¨­å®š")
 
     Set rng = .Columns("F").Find(item_name)
     
@@ -105,7 +105,7 @@ End Function
 '
 '    If r > 6 And r < 108 Then
 '
-'        With Sheets("¤é³ø¶ñ¼g")
+'        With Sheets("æ—¥å ±å¡«å¯«")
 '
 '        .Unprotect
 '
@@ -117,7 +117,7 @@ End Function
 '            .Cells(r, "F") = getSumByItemName(item_name, func.tranDate(report_date))
 '            .Cells(r, "F").HorizontalAlignment = xlCenter
 '
-'            If .Cells(r, "F") < 0 Then MsgBox "³Ñ¾l¼Æ¶q¬°­t­È!", vbCritical
+'            If .Cells(r, "F") < 0 Then MsgBox "å‰©é¤˜æ•¸é‡ç‚ºè² å€¼!", vbCritical
 '
 '        Else
 '
