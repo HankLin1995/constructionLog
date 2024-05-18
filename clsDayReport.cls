@@ -20,17 +20,17 @@ Private dataObj As New clsWriteData
 
 Public workDate As Date
 
-Sub getInterval(ByRef sr, ByRef er) '¨ú±o¤é´Á¶¡ªº¼Æ¦r®t
+Sub getInterval(ByRef sr, ByRef er) 'å–å¾—æ—¥æœŸé–“çš„æ•¸å­—å·®
 
-'StartDate = Val(InputBox("¶}©l¤é´Á(EX:1110101)", , "1110101"))
+'StartDate = Val(InputBox("é–‹å§‹æ—¥æœŸ(EX:1110101)", , "1110101"))
 Call checkObj.checkIsValidDate(StartDate)
-'EndDate = Val(InputBox("µ²§ô¤é´Á(EX:1110131)", , "1110131"))
+'EndDate = Val(InputBox("çµæŸæ—¥æœŸ(EX:1110131)", , "1110131"))
 Call checkObj.checkIsValidDate(EndDate)
 
 Call checkObj.checkUseDays(myFun.tranDate(StartDate), myFun.tranDate(EndDate))
 Call checkObj.checkIsHaveDataInDates(myFun.tranDate(StartDate), myFun.tranDate(EndDate))
 
-workDate = Sheets("¼Ğ®×³]©w").Range("B3")
+workDate = Sheets("æ¨™æ¡ˆè¨­å®š").Range("B3")
 
 sr = myFun.tranDate(StartDate) - workDate + 1
 er = myFun.tranDate(EndDate) - workDate + 1
@@ -41,8 +41,8 @@ Function getCodes(ByVal mydate As Date)
 
 Dim coll As New Collection
 
-'With ThisWorkbook.Sheets("¤é³ø¸ê®Æ®w")
-With ThisWorkbook.Sheets("¤å¥ó¸ê®Æ®w")
+'With ThisWorkbook.Sheets("æ—¥å ±è³‡æ–™åº«")
+With ThisWorkbook.Sheets("æ–‡ä»¶è³‡æ–™åº«")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -75,11 +75,11 @@ ThisWorkbook.Activate
 
 If print_mode = 1 Or print_mode = 2 Then
 
-    ThisWorkbook.Sheets("¤é³ø²Ä¤@Áp").Copy (wb.Sheets(1))
+    ThisWorkbook.Sheets("æ—¥å ±ç¬¬ä¸€è¯").Copy (wb.Sheets(1))
 
 ElseIf print_mode = 3 Or print_mode = 4 Then
 
-    ThisWorkbook.Sheets("¤é³ø²Ä¤GÁp").Copy (wb.Sheets(1))
+    ThisWorkbook.Sheets("æ—¥å ±ç¬¬äºŒè¯").Copy (wb.Sheets(1))
     'code = Split(code, "-")(0)
     'Page = Split(code, "-")(1)
 
@@ -104,7 +104,7 @@ End Sub
 
 Sub hideEmptyRow()
 
-With Sheets("¤é³ø²Ä¤@Áp")
+With Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
 For i = 1 To 2
 
@@ -136,7 +136,7 @@ End Sub
 
 Sub hideEmpyNum() '(ByVal sht As Object)
 
-With Sheets("¤é³ø²Ä¤@Áp")
+With Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
 For i = 1 To 2
 
@@ -157,7 +157,7 @@ End With
 End Sub
 
 
-Sub getDataByDate(ByVal recDate As Date, ByVal recCode As String) '²Ä¤@Áp²Ö­p¤u¶µ¤£¬°0
+Sub getDataByDate(ByVal recDate As Date, ByVal recCode As String) 'ç¬¬ä¸€è¯ç´¯è¨ˆå·¥é …ä¸ç‚º0
 
 Dim recObj As New clsRecord
 
@@ -165,7 +165,7 @@ Dim recObj As New clsRecord
 
 ThisWorkbook.Activate
 
-With Sheets("¤é³ø²Ä¤@Áp")
+With Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
 .Range("B2") = recCode
 .Range("K2") = recObj.getRecLoc(recCode)
@@ -175,9 +175,9 @@ With Sheets("¤é³ø²Ä¤@Áp")
 
 End With
 
-'====1-¬I¤u¤u¶µ¡B2-§÷®ÆºŞ²z==========
+'====1-æ–½å·¥å·¥é …ã€2-ææ–™ç®¡ç†==========
 
-For i = 1 To 2 '¬I¤u¤u¶µ¡B§÷®ÆºŞ²z
+For i = 1 To 2 'æ–½å·¥å·¥é …ã€ææ–™ç®¡ç†
 
 Set coll_item = getUsedItemByDate(recCode, recDate, i)
 Call checkReportCount(coll_item.Count, i)
@@ -185,7 +185,7 @@ Call KeyInItem(coll_item, recDate, recCode, i)
 
 Next
 
-'======3-¤H­û¡B4-¾÷¨ã================
+'======3-äººå“¡ã€4-æ©Ÿå…·================
 
 Set coll_L = getUsedItemByDate(recCode, recDate, 3)
 Set coll_E = getUsedItemByDate(recCode, recDate, 4)
@@ -193,7 +193,7 @@ Set coll_E = getUsedItemByDate(recCode, recDate, 4)
 Call checkReportCount(WorksheetFunction.Max(coll_L.Count, coll_E.Count), 3)
 Call KeyInItem_Merge(coll_L, coll_E, recDate, recCode, 3)
 
-'=====5-¤å¥ó============
+'=====5-æ–‡ä»¶============
 
 Call KeyInItem_Paper(recCode)
 
@@ -201,7 +201,7 @@ End Sub
 
 Sub KeyInItem_Paper(ByVal recCode As String)
 
-With ThisWorkbook.Sheets("¤é³ø²Ä¤@Áp")
+With ThisWorkbook.Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
 Call getReportSrEr(sr, er, 5)
 
@@ -263,9 +263,9 @@ End Function
 
 Sub KeyInItem_Merge(ByVal coll_L, ByVal coll_E, ByVal recDate As Date, ByVal recCode As String, ByVal mode As Byte) ', ByVal recLoc As String)
 
-With Sheets("¤é³ø²Ä¤@Áp")
+With Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
-Call getReportSrEr(sr, er, mode) '¨ú±o°_©l¦C¡B²×ÂI¦C
+Call getReportSrEr(sr, er, mode) 'å–å¾—èµ·å§‹åˆ—ã€çµ‚é»åˆ—
 
 .Range("A" & sr + 2 & ":M" & er - 1).ClearContents
 
@@ -279,7 +279,7 @@ For Each it In coll_L
     .Range("A" & r).WrapText = True
     .Range("C" & r) = getUsedAmountByItem(it, recCode, mode)
     .Range("E" & r) = getSumAmountByItem(it, recDate, mode)
-    .Range("A" & r & ":E" & r).Font.Name = "¼Ğ·¢Åé"
+    .Range("A" & r & ":E" & r).Font.Name = "æ¨™æ¥·é«”"
 
     r = r + 1
     
@@ -294,7 +294,7 @@ For Each it In coll_E
     .Range("H" & r) = Split(it, ">")(1)
     .Range("J" & r) = getUsedAmountByItem(it, recCode, mode + 1)
     .Range("L" & r) = getSumAmountByItem(it, recDate, mode + 1)
-    .Range("H" & r & ":L" & r).Font.Name = "¼Ğ·¢Åé"
+    .Range("H" & r & ":L" & r).Font.Name = "æ¨™æ¥·é«”"
     
     r = r + 1
     
@@ -308,9 +308,9 @@ Sub KeyInItem(ByVal coll_item, ByVal recDate As Date, ByVal recCode As String, B
 
 Dim o As New clsPCCES
 
-With Sheets("¤é³ø²Ä¤@Áp")
+With Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
-Call getReportSrEr(sr, er, mode) '¨ú±o°_©l¦C¡B²×ÂI¦C
+Call getReportSrEr(sr, er, mode) 'å–å¾—èµ·å§‹åˆ—ã€çµ‚é»åˆ—
 
 .Range("A" & sr + 2 & ":M" & er - 1).ClearContents
 
@@ -336,7 +336,7 @@ For Each it In coll_item
     .Range("F" & r) = getAmountByItem(it, mode)
     .Range("H" & r) = getUsedAmountByItem(it, recCode, mode)
     .Range("J" & r) = getSumAmountByItem(it, recDate, mode)
-    .Range("A" & r & ":J" & r).Font.Name = "¼Ğ·¢Åé"
+    .Range("A" & r & ":J" & r).Font.Name = "æ¨™æ¥·é«”"
     
     If mode = 1 Then
     price = o.getMoneyByItemKey(it)
@@ -487,9 +487,9 @@ End Function
 
 Function getUnitByItem(ByVal recItem, ByVal mode As Byte)
 
-shtName = "¤u®Æ³]©w"
+shtName = "å·¥æ–™è¨­å®š"
 
-If mode = 1 Then shtName = "«´¬ù¸Ô²Óªí"
+If mode = 1 Then shtName = "å¥‘ç´„è©³ç´°è¡¨"
 
 With Sheets(shtName)
 
@@ -505,9 +505,9 @@ End Function
 
 Function getAmountByItem(ByVal recItem, ByVal mode As Byte)
 
-shtName = "¤u®Æ³]©w"
+shtName = "å·¥æ–™è¨­å®š"
 
-If mode = 1 Then shtName = "«´¬ù¸Ô²Óªí"
+If mode = 1 Then shtName = "å¥‘ç´„è©³ç´°è¡¨"
 
 With Sheets(shtName)
 
@@ -523,9 +523,9 @@ End Function
 
 Function getNumByItem(ByVal recItem, ByVal mode As Byte)
 
-shtName = "¤u®Æ³]©w"
+shtName = "å·¥æ–™è¨­å®š"
 
-If mode = 1 Then shtName = "«´¬ù¸Ô²Óªí"
+If mode = 1 Then shtName = "å¥‘ç´„è©³ç´°è¡¨"
 
 With Sheets(shtName)
 
@@ -545,9 +545,9 @@ Dim coll As New Collection
 
 'set the target string to find in range("H2:H7") first
 
-arr = ThisWorkbook.Sheets("¼Ğ®×³]©w").Range("H2:H7")
+arr = ThisWorkbook.Sheets("æ¨™æ¡ˆè¨­å®š").Range("H2:H7")
 
-With ThisWorkbook.Sheets("¤é³ø²Ä¤@Áp")
+With ThisWorkbook.Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
 For i = 1 To 6
 
@@ -556,22 +556,22 @@ coll.Add rng.Row
 
 Next
 
-'Set rng = .Cells.Find(what:="¤@¡B¨Ì¬I¤u­pµe®Ñ°õ¦æ«ö¹Ï¬I¤u·§ªp¡]§t¬ù©w¤§­«­n¬I¤u¶µ¥Ø¤Î§¹¦¨¼Æ¶qµ¥¡^¡G")
+'Set rng = .Cells.Find(what:="ä¸€ã€ä¾æ–½å·¥è¨ˆç•«æ›¸åŸ·è¡ŒæŒ‰åœ–æ–½å·¥æ¦‚æ³ï¼ˆå«ç´„å®šä¹‹é‡è¦æ–½å·¥é …ç›®åŠå®Œæˆæ•¸é‡ç­‰ï¼‰ï¼š")
 'coll.Add rng.Row
 '
-'Set rng = .Cells.Find(what:="¤G¡B¤u¦a§÷®ÆºŞ²z·§ªp¡]§t¬ù©w¤§­«­n§÷®Æ¨Ï¥Îª¬ªp¤Î¼Æ¶qµ¥¡^¡G")
+'Set rng = .Cells.Find(what:="äºŒã€å·¥åœ°ææ–™ç®¡ç†æ¦‚æ³ï¼ˆå«ç´„å®šä¹‹é‡è¦ææ–™ä½¿ç”¨ç‹€æ³åŠæ•¸é‡ç­‰ï¼‰ï¼š")
 'coll.Add rng.Row
 '
-'Set rng = .Cells.Find(what:="¤T¡B¤u¦a¤H­û¤Î¾÷¨ãºŞ²z¡]§t¬ù©w¤§¥X¤u¤H¼Æ¤Î¾÷¨ã¨Ï¥Î±¡§Î¤Î¼Æ¶q¡^¡G")
+'Set rng = .Cells.Find(what:="ä¸‰ã€å·¥åœ°äººå“¡åŠæ©Ÿå…·ç®¡ç†ï¼ˆå«ç´„å®šä¹‹å‡ºå·¥äººæ•¸åŠæ©Ÿå…·ä½¿ç”¨æƒ…å½¢åŠæ•¸é‡ï¼‰ï¼š")
 'coll.Add rng.Row
 '
-'Set rng = .Cells.Find(what:="¥|¡B¥»¤é¬I¤u¶µ¥Ø¬O§_¦³¶·¨Ì¡uÀç³y·~±M·~¤uµ{¯S©w¬I¤u¶µ¥ØÀ³¸m¤§§Ş³N¤hºØÃş¡B¤ñ²v©Î¤H¼Æ¼Ğ·Çªí¡v")
+'Set rng = .Cells.Find(what:="å››ã€æœ¬æ—¥æ–½å·¥é …ç›®æ˜¯å¦æœ‰é ˆä¾ã€Œç‡Ÿé€ æ¥­å°ˆæ¥­å·¥ç¨‹ç‰¹å®šæ–½å·¥é …ç›®æ‡‰ç½®ä¹‹æŠ€è¡“å£«ç¨®é¡ã€æ¯”ç‡æˆ–äººæ•¸æ¨™æº–è¡¨ã€")
 'coll.Add rng.Row
 '
-'Set rng = .Cells.Find(what:="¤­¡B¤u¦aÂ¾·~¦w¥ş½Ã¥Í¨Æ¶µ¤§·ş¾É¡B¤½¦@Àô¹Ò»P¦w¥ş¤§ºûÅ@¤Î¨ä¥L¤u¦a¦æ¬F¨Æ°È¡G")
+'Set rng = .Cells.Find(what:="äº”ã€å·¥åœ°è·æ¥­å®‰å…¨è¡›ç”Ÿäº‹é …ä¹‹ç£å°ã€å…¬å…±ç’°å¢ƒèˆ‡å®‰å…¨ä¹‹ç¶­è­·åŠå…¶ä»–å·¥åœ°è¡Œæ”¿äº‹å‹™ï¼š")
 'coll.Add rng.Row
 '
-'Set rng = .Cells.Find(what:="¤»¡B¬I¤u¨ú¼Ë¸ÕÅç¬ö¿ı¡G")
+'Set rng = .Cells.Find(what:="å…­ã€æ–½å·¥å–æ¨£è©¦é©—ç´€éŒ„ï¼š")
 'coll.Add rng.Row
 
 End With
@@ -583,11 +583,11 @@ End Function
 
 Sub checkReportCount(ByVal item_count, ByVal mode As Byte)
 
-With Sheets("¤é³ø²Ä¤@Áp")
+With Sheets("æ—¥å ±ç¬¬ä¸€è¯")
 
 .Activate
 
-Call getReportSrEr(sr, er, mode) '¨ú±o¼ĞÃD¤§°_¨´¦C
+Call getReportSrEr(sr, er, mode) 'å–å¾—æ¨™é¡Œä¹‹èµ·è¿„åˆ—
 
 total_count = (er - 1) - (sr + 2) + 1
 
@@ -598,7 +598,7 @@ needRow = item_count - total_count
 'Next
 
 For i = 1 To needRow
-    Sheets("¤é³ø²Ä¤@Áp").Rows(er - 1 & ":" & er - 1).Select
+    Sheets("æ—¥å ±ç¬¬ä¸€è¯").Rows(er - 1 & ":" & er - 1).Select
     Application.CutCopyMode = False
     Selection.Copy
     Selection.Insert Shift:=xlDown
@@ -610,11 +610,11 @@ End With
 
 End Sub
 
-Function getUsedItemByDate(ByVal myCode As String, ByVal mydate As Date, ByVal mode As Byte) ', ByVal mycode As String) 'ºtºâ¥ı¨ú±o¶µ¥Ø
+Function getUsedItemByDate(ByVal myCode As String, ByVal mydate As Date, ByVal mode As Byte) ', ByVal mycode As String) 'æ¼”ç®—å…ˆå–å¾—é …ç›®
     
 Dim coll_item As New Collection
 
-With ThisWorkbook.Sheets(dataObj.getDB_name(mode)) '"¤é³ø¸ê®Æ®w")
+With ThisWorkbook.Sheets(dataObj.getDB_name(mode)) '"æ—¥å ±è³‡æ–™åº«")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -626,8 +626,8 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         recItem = .Cells(r, 5)
         recNote = .Cells(r, "H")
         
-        'If print_mode = 2 Or print_mode = 3 Then '²Ö­p
-        If print_mode = 1 Or print_mode = 2 Or print_mode = 3 Then '²Ö­p
+        'If print_mode = 2 Or print_mode = 3 Then 'ç´¯è¨ˆ
+        If print_mode = 1 Or print_mode = 2 Or print_mode = 3 Then 'ç´¯è¨ˆ
         
             If myFun.tranDate(recDate) <= mydate And recNote = "" Then
         
@@ -637,7 +637,7 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         
             End If
             
-'        ElseIf print_mode = 1 Then 'ªí³æ
+'        ElseIf print_mode = 1 Then 'è¡¨å–®
 '
 '            If recCode = myCode And recNote = "" Then
 '
@@ -655,16 +655,16 @@ End With
 
 'Call sortByPCCESRows(coll_item)
 
-If mode <> 5 Then Set getUsedItemByDate = sortByPCCESRows(coll_item, mode) '°µ±Æ§Ç
+If mode <> 5 Then Set getUsedItemByDate = sortByPCCESRows(coll_item, mode) 'åšæ’åº
 
 End Function
 
 Function sortByPCCESRows(ByVal coll_item, ByVal mode As Byte)
 
 If mode = 1 Then
-    shtName = "«´¬ù¸Ô²Óªí"
+    shtName = "å¥‘ç´„è©³ç´°è¡¨"
 Else
-    shtName = "¤u®Æ³]©w"
+    shtName = "å·¥æ–™è¨­å®š"
 End If
 Dim coll As New Collection
 
@@ -684,7 +684,7 @@ With ThisWorkbook.Sheets("TMP")
         
         Set rng = Sheets(shtName).Cells.Find(it)
         
-        If rng Is Nothing Then MsgBox it & "§ä¤£¨ì¶µ¥Ø!"
+        If rng Is Nothing Then MsgBox it & "æ‰¾ä¸åˆ°é …ç›®!"
         
         .Cells(r, 2) = rng.Row
         
@@ -739,7 +739,7 @@ End If
 
 Call checkRows(coll.Count)
 
-With ThisWorkbook.Sheets("¤é³ø²Ä¤GÁp")
+With ThisWorkbook.Sheets("æ—¥å ±ç¬¬äºŒè¯")
 
     .Range("K3") = recDate
 
@@ -771,7 +771,7 @@ With ThisWorkbook.Sheets("¤é³ø²Ä¤GÁp")
     
     progress = use_money / o.getSumMoney
     
-    Set rng = .Cells.Find("§¹¦¨¦Ê¤À²v(µù2)¡G")
+    Set rng = .Cells.Find("å®Œæˆç™¾åˆ†ç‡(è¨»2)ï¼š")
     er = rng.Row
     
     .Range("K" & er) = progress
@@ -782,13 +782,13 @@ End Sub
 
 Sub checkRows(ByVal item_count)
 
-With ThisWorkbook.Sheets("¤é³ø²Ä¤GÁp")
+With ThisWorkbook.Sheets("æ—¥å ±ç¬¬äºŒè¯")
 
     .Activate
 
     sr = 8
     
-    Set rng = .Cells.Find("§¹¦¨¦Ê¤À²v(µù2)¡G")
+    Set rng = .Cells.Find("å®Œæˆç™¾åˆ†ç‡(è¨»2)ï¼š")
     er = rng.Row
 
     .Range("A" & sr & ":M" & er - 1).ClearContents
@@ -798,7 +798,7 @@ With ThisWorkbook.Sheets("¤é³ø²Ä¤GÁp")
     needRow = item_count - total_count
     
     For i = 1 To needRow
-        Sheets("¤é³ø²Ä¤GÁp").Rows(er - 1 & ":" & er - 1).Select
+        Sheets("æ—¥å ±ç¬¬äºŒè¯").Rows(er - 1 & ":" & er - 1).Select
         Application.CutCopyMode = False
         Selection.Copy
         Selection.Insert Shift:=xlDown
