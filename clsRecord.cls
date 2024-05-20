@@ -235,7 +235,7 @@ End Sub
 
 Function getRecLoc(ByVal recCode As String)
 
-With Sheets("日報資料庫")
+With Sheets("文件資料庫")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
