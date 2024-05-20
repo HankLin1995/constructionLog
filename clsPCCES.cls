@@ -17,11 +17,11 @@ Application.ScreenUpdating = False
 
 End Sub
 
-Sub getFileName() 'å–å¾—é ç®—æ›¸å…§å®¹
+Sub getFileName() '¨ú±o¹wºâ®Ñ¤º®e
 
 f = Application.GetOpenFilename
 
-If f = "False" Then MsgBox "æœªå–å¾—æª”æ¡ˆ", vbCritical: End
+If f = "False" Then MsgBox "¥¼¨ú±oÀÉ®×", vbCritical: End
 
 tmp = Split(f, "\")
 
@@ -35,18 +35,18 @@ End Sub
 
 Sub clearPCCES_data()
 
-With ThisWorkbook.Sheets("å¥‘ç´„è©³ç´°è¡¨")
+With ThisWorkbook.Sheets("«´¬ù¸Ô²Óªí")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 If lr > 1 Then
     .Activate
-    msg = MsgBox("ä½ æœ‰èˆŠè³‡æ–™å­˜åœ¨ï¼Œç¢ºå®šè¦åˆªé™¤?", vbCritical + vbYesNo)
+    msg = MsgBox("§A¦³ÂÂ¸ê®Æ¦s¦b¡A½T©w­n§R°£?", vbCritical + vbYesNo)
     
     If msg = vbYes Then
         .Range("A2").Resize(lr, 7).Clear
     Else
-        MsgBox "å–æ¶ˆæ“ä½œ", vbInformation
+        MsgBox "¨ú®ø¾Ş§@", vbInformation
         wb.Close False
         End
     End If
@@ -61,7 +61,7 @@ Function getShtContentName()
 
 For Each sht In wb.Sheets
 
-    If sht.Name Like "*è©³ç´°è¡¨" Then
+    If sht.Name Like "*¸Ô²Óªí" Then
     
         getShtContentName = sht.Name
     
@@ -85,7 +85,7 @@ With wb.Sheets(getShtContentName)
         item_amount = .Cells(r, 4)
         item_cost = .Cells(r, 5)
         
-        'åˆ—å‡ºæ‰€æœ‰é …ç›®forç¬¬ä¸‰éšæ®µèª¿æ•´
+        '¦C¥X©Ò¦³¶µ¥Øfor²Ä¤T¶¥¬q½Õ¾ã
         
         If item_num <> "" Then 'And item_amount <> 0 Then
         
@@ -99,7 +99,7 @@ With wb.Sheets(getShtContentName)
 
 End With
 
-MsgBox "å–å¾—PCCESé ç®—æ›¸å®Œæˆï¼Œè«‹é€²è¡Œéƒ¨åˆ†é …ç›®å¾®èª¿", vbInformation
+MsgBox "¨ú±oPCCES¹wºâ®Ñ§¹¦¨¡A½Ğ¶i¦æ³¡¤À¶µ¥Ø·L½Õ", vbInformation
 
 wb.Close False
 
@@ -142,7 +142,7 @@ End Function
 
 Private Sub getData(ByVal num As String, ByVal cont As String, ByVal unit As String, ByVal amount As String, ByVal cost As String)
 
-    With ThisWorkbook.Sheets("å¥‘ç´„è©³ç´°è¡¨")
+    With ThisWorkbook.Sheets("«´¬ù¸Ô²Óªí")
     
         lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         
@@ -165,7 +165,7 @@ End Sub
 
 Sub setValidation2()
 
-With Sheets("å¥‘ç´„è©³ç´°è¡¨")
+With Sheets("«´¬ù¸Ô²Óªí")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -173,16 +173,16 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 End With
 
-With Sheets("æ—¥å ±å¡«å¯«")
+With Sheets("¤é³ø¶ñ¼g")
 
 .Unprotect
 
-For r = 7 To 7 + 100 'åªæœ‰å–åˆ°ç¬¬100æ¬„
+For r = 7 To 7 + 100 '¥u¦³¨ú¨ì²Ä100Äæ
 
     .Range("A" & r).Validation.Delete
 
     .Range("A" & r).Validation.Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
-Formula1:="=å¥‘ç´„è©³ç´°è¡¨!$A" & 2 & ":$A" & lr
+Formula1:="=«´¬ù¸Ô²Óªí!$A" & 2 & ":$A" & lr
 
 Next
 
@@ -201,34 +201,34 @@ Sub setValidation()
     Dim customRangeArray() As String
     Dim i As Long
     
-    ' ç²å–åŒ¹é…çš„ç¯„åœ
+    ' Àò¨ú¤Ç°tªº½d³ò
     customRange = CompareContractAndActualQuantities()
     
-    ' è¨­å®šå·¥ä½œè¡¨è®Šæ•¸
-    Set wsContract = Sheets("å¥‘ç´„è©³ç´°è¡¨")
-    ' ä½ å¯ä»¥é¸æ“‡å°‡å€¼æ”¾åœ¨ä¸€å€‹æ–°çš„å·¥ä½œè¡¨ä¸­æˆ–åœ¨å¥‘ç´„è©³ç´°è¡¨ä¸­çš„ç©ºç™½å€åŸŸ
-    Set wsValidation = Sheets("æ¨™æ¡ˆè¨­å®š") ' ä¾‹å¦‚ï¼Œå¯ä»¥å°‡åŒ¹é…å€¼æ”¾åœ¨å¥‘ç´„è©³ç´°è¡¨çš„æŸä¸€ç©ºç™½åˆ—ä¸­
+    ' ³]©w¤u§@ªíÅÜ¼Æ
+    Set wsContract = Sheets("«´¬ù¸Ô²Óªí")
+    ' §A¥i¥H¿ï¾Ü±N­È©ñ¦b¤@­Ó·sªº¤u§@ªí¤¤©Î¦b«´¬ù¸Ô²Óªí¤¤ªºªÅ¥Õ°Ï°ì
+    Set wsValidation = Sheets("¼Ğ®×³]©w") ' ¨Ò¦p¡A¥i¥H±N¤Ç°t­È©ñ¦b«´¬ù¸Ô²Óªíªº¬Y¤@ªÅ¥Õ¦C¤¤
     
     wsValidation.Range("K1:K" & wsValidation.Cells(1, 1).End(xlDown).Row).ClearContents
     
-    ' å°‡ customRange æ‹†åˆ†æˆå–®å€‹åœ°å€
+    ' ±N customRange ©î¤À¦¨³æ­Ó¦a§}
     customRangeArray = Split(customRange, ",")
     
-    ' å°‡é€™äº›å€¼æ”¾åœ¨ wsValidation çš„æŸå€‹ç©ºç™½å€åŸŸï¼Œä¾‹å¦‚åˆ— K
+    ' ±N³o¨Ç­È©ñ¦b wsValidation ªº¬Y­ÓªÅ¥Õ°Ï°ì¡A¨Ò¦p¦C K
     For i = LBound(customRangeArray) To UBound(customRangeArray)
         wsValidation.Range("K" & i + 1).Value = wsContract.Range(customRangeArray(i)).Value
     Next i
     
-    With Sheets("æ—¥å ±å¡«å¯«")
+    With Sheets("¤é³ø¶ñ¼g")
     
         .Unprotect
     
-        For r = 7 To 7 + 100 'åªæœ‰å–åˆ°ç¬¬100æ¬„
+        For r = 7 To 7 + 100 '¥u¦³¨ú¨ì²Ä100Äæ
     
             .Range("A" & r).Validation.Delete
     
             .Range("A" & r).Validation.Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
-                Formula1:="=æ¨™æ¡ˆè¨­å®š!$K$1:$K$" & UBound(customRangeArray) + 1
+                Formula1:="=¼Ğ®×³]©w!$K$1:$K$" & UBound(customRangeArray) + 1
     
         Next
     
@@ -254,25 +254,25 @@ Function CompareContractAndActualQuantities()
     Dim contractQty As Double
     Dim matchRanges As String
     
-    ' è¨­å®šå·¥ä½œè¡¨è®Šæ•¸
-    Set wsData = Sheets("æ—¥å ±è³‡æ–™åº«") ' è«‹æ ¹æ“šä½ çš„å¯¦éš›å·¥ä½œè¡¨åç¨±èª¿æ•´
-    Set wsContract = Sheets("å¥‘ç´„è©³ç´°è¡¨") ' è«‹æ ¹æ“šä½ çš„å¯¦éš›å·¥ä½œè¡¨åç¨±èª¿æ•´
+    ' ³]©w¤u§@ªíÅÜ¼Æ
+    Set wsData = Sheets("¤é³ø¸ê®Æ®w") ' ½Ğ®Ú¾Ú§Aªº¹ê»Ú¤u§@ªí¦WºÙ½Õ¾ã
+    Set wsContract = Sheets("«´¬ù¸Ô²Óªí") ' ½Ğ®Ú¾Ú§Aªº¹ê»Ú¤u§@ªí¦WºÙ½Õ¾ã
     
-    ' å»ºç«‹ Dictionary ç‰©ä»¶ä¾†å„²å­˜ç´¯ç©æ•¸é‡
+    ' «Ø¥ß Dictionary ª«¥ó¨ÓÀx¦s²Ö¿n¼Æ¶q
     Set dict = CreateObject("Scripting.Dictionary")
     Set contractDict = CreateObject("Scripting.Dictionary")
     
-    ' è¿­ä»£å¥‘ç´„è©³ç´°è¡¨ç¯„åœï¼Œè¨˜éŒ„å¥‘ç´„æ•¸é‡
+    ' ­¡¥N«´¬ù¸Ô²Óªí½d³ò¡A°O¿ı«´¬ù¼Æ¶q
     For i = 2 To wsContract.Cells(wsContract.Rows.Count, "B").End(xlUp).Row
         key = wsContract.Cells(i, "B").Value
         contractQty = wsContract.Cells(i, "E").Value
         contractDict(key) = contractQty
     Next i
     
-    ' è¿­ä»£æ—¥å ±è³‡æ–™åº«ç¯„åœï¼Œçµ±è¨ˆ D æ¬„ä½çš„ç´¯ç©æ•¸é‡
+    ' ­¡¥N¤é³ø¸ê®Æ®w½d³ò¡A²Î­p D Äæ¦ìªº²Ö¿n¼Æ¶q
     For i = 2 To wsData.Cells(wsData.Rows.Count, "D").End(xlUp).Row
         key = wsData.Cells(i, "D").Value
-        If wsData.Cells(i, "H").Value = "" Then ' æª¢æŸ¥ H æ¬„ä½æ˜¯å¦ç‚ºç©ºç™½
+        If wsData.Cells(i, "H").Value = "" Then ' ÀË¬d H Äæ¦ì¬O§_¬°ªÅ¥Õ
             If Not dict.exists(key) Then
                 dict.Add key, wsData.Cells(i, "G").Value
             Else
@@ -281,7 +281,7 @@ Function CompareContractAndActualQuantities()
         End If
     Next i
     
-    ' æ¯”è¼ƒå¥‘ç´„æ•¸é‡èˆ‡å¯¦ä½œæ•¸é‡
+    ' ¤ñ¸û«´¬ù¼Æ¶q»P¹ê§@¼Æ¶q
     matchRanges = ""
     For i = 2 To wsContract.Cells(wsContract.Rows.Count, "B").End(xlUp).Row
         key = wsContract.Cells(i, "B").Value
@@ -302,11 +302,11 @@ Function CompareContractAndActualQuantities()
         End If
     Next i
     
-    ' è¼¸å‡ºåŒ¹é…çš„ç¯„åœ
-    Debug.Print "åŒ¹é…çš„ç¯„åœ: " & matchRanges
+    ' ¿é¥X¤Ç°tªº½d³ò
+    Debug.Print "¤Ç°tªº½d³ò: " & matchRanges
     CompareContractAndActualQuantities = matchRanges
     
-    ' æ¸…ç†
+    ' ²M²z
     Set dict = Nothing
     Set contractDict = Nothing
     Set wsData = Nothing
@@ -316,7 +316,7 @@ End Function
 
 Sub RefreshDB()
 
-With Sheets("é•·è¡¨æ ¼å¼")
+With Sheets("ªøªí®æ¦¡")
 
 .Unprotect
 
@@ -330,7 +330,7 @@ lc = .Cells(1, .Columns.Count).End(xlToLeft).Column
 
 End With
 
-With Sheets("ç¯„æœ¬è³‡æ–™åº«")
+With Sheets("½d¥»¸ê®Æ®w")
 
 .Unprotect
 
@@ -341,12 +341,12 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 End With
 
-arr = Array("æ—¥å ±", "ææ–™", "äººå“¡", "æ©Ÿå…·", "æ–‡ä»¶")
-'arr = Array("ææ–™", "äººå“¡", "æ©Ÿå…·", "æ–‡ä»¶")
+arr = Array("¤é³ø", "§÷®Æ", "¤H­û", "¾÷¨ã", "¤å¥ó")
+'arr = Array("§÷®Æ", "¤H­û", "¾÷¨ã", "¤å¥ó")
 
 For i = LBound(arr) To UBound(arr)
 
-    With Sheets(arr(i) & "è³‡æ–™åº«")
+    With Sheets(arr(i) & "¸ê®Æ®w")
     
         .Unprotect
         
@@ -363,11 +363,11 @@ End Sub
 
 Function getSumMoney()
 
-With Sheets("å¥‘ç´„è©³ç´°è¡¨")
+With Sheets("«´¬ù¸Ô²Óªí")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
-Set rng = .Rows("1").Find("æ•¸é‡")
+Set rng = .Rows("1").Find("¼Æ¶q")
 
 c = rng.Column
 
@@ -383,7 +383,7 @@ Next
 
 End With
 
-With Sheets("æ¨™æ¡ˆè¨­å®š")
+With Sheets("¼Ğ®×³]©w")
 
     lr = .Cells(.Rows.Count, "F").End(xlUp).Row
 
@@ -400,13 +400,13 @@ End Function
 
 Function getContractMoneyByKeyItem(ByVal s As String) As Double
 
-With Sheets("å¥‘ç´„è©³ç´°è¡¨")
+With Sheets("«´¬ù¸Ô²Óªí")
 
 Set rng = .Columns("A").Find(s)
 
 If rng Is Nothing Then
     
-    MsgBox "å¥‘ç´„è©³ç´°è¡¨ä¸­æ‰¾ä¸åˆ°" & s & "!"
+    MsgBox "«´¬ù¸Ô²Óªí¤¤§ä¤£¨ì" & s & "!"
 
 Else
 
@@ -423,10 +423,10 @@ End Function
 
 Function getMoneyByItemKey(ByVal item_key)
 
-With Sheets("å¥‘ç´„è©³ç´°è¡¨")
+With Sheets("«´¬ù¸Ô²Óªí")
 
 r = .Columns("A").Find(item_key).Row
-c = .Rows("1").Find("æ•¸é‡").Column
+c = .Rows("1").Find("¼Æ¶q").Column
     
 getMoneyByItemKey = .Cells(r, c + 1)
 
@@ -438,7 +438,7 @@ Function getAllItems()
 
 Dim coll As New Collection
 
-With ThisWorkbook.Sheets("å¥‘ç´„è©³ç´°è¡¨")
+With ThisWorkbook.Sheets("«´¬ù¸Ô²Óªí")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -460,7 +460,7 @@ Sub checkIsRepeat()
 
 Dim coll As New Collection
 
-With Sheets("å¥‘ç´„è©³ç´°è¡¨")
+With Sheets("«´¬ù¸Ô²Óªí")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -476,15 +476,15 @@ If s <> "" Then
     MsgBox s, vbCritical
     .Range("A2").Resize(lr, 7).Clear
 Else
-    Debug.Print "å¥‘ç´„è©³ç´°è¡¨çš†ç‚ºå”¯ä¸€å€¼!"
+    Debug.Print "«´¬ù¸Ô²Óªí¬Ò¬°°ß¤@­È!"
 End If
 
 Exit Sub
 
 End With
 
-ERRORHANDLE:       ' éŒ¯èª¤è™•ç†ç”¨çš„ç¨‹å¼ç¢¼
-  s = s & "åˆ—æ•¸=" & r & ",é …ç›®=" & mykey & "å·²ç¶“è¢«ä½¿ç”¨!è«‹ä¿®æ­£!" & vbNewLine
+ERRORHANDLE:       ' ¿ù»~³B²z¥Îªºµ{¦¡½X
+  s = s & "¦C¼Æ=" & r & ",¶µ¥Ø=" & mykey & "¤w¸g³Q¨Ï¥Î!½Ğ­×¥¿!" & vbNewLine
   Resume Next
 
 End Sub
