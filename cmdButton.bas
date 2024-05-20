@@ -35,7 +35,7 @@ End With
 
 '==============================================
 
-Call obj.getInterval(sr, er) '¨ú±o¤é´Á°_¨´ªº¼Æ¦r«¬ºA
+Call obj.getInterval(sr, er) 'å–å¾—æ—¥æœŸèµ·è¿„çš„æ•¸å­—å‹æ…‹
 
 Set wb = Workbooks.Add
 
@@ -44,7 +44,7 @@ For r = er To sr Step -1
     'get the codes
     ThisWorkbook.Activate
     
-    Set coll_code = obj.getCodes(obj.workDate + r - 1) '®Ú¾Ú¤é´Á¨ú±o¤é´ÁCodes
+    Set coll_code = obj.getCodes(obj.workDate + r - 1) 'æ ¹æ“šæ—¥æœŸå–å¾—æ—¥æœŸCodes
     
     For j = coll_code.Count To 1 Step -1
     
@@ -56,7 +56,7 @@ For r = er To sr Step -1
         
         If print_mode = 1 Or print_mode = 2 Then
         
-            Call obj.getDataByDate(obj.workDate + r - 1, code) '¨ú±o¸Ó¤é¤é³ø
+            Call obj.getDataByDate(obj.workDate + r - 1, code) 'å–å¾—è©²æ—¥æ—¥å ±
             Call obj.hideEmptyRow
             
             If print_mode = 1 Then Call obj.hideEmpyNum
@@ -76,12 +76,12 @@ Next
 Application.DisplayAlerts = False
 
 For Each sht In wb.Sheets
-    If sht.Name Like "¤u§@ªí*" Then sht.Delete
+    If sht.Name Like "å·¥ä½œè¡¨*" Then sht.Delete
 Next
 
 Application.DisplayAlerts = True
 
-'If wb.Sheets.Count > 1 Then wb.Sheets("¤u§@ªí1").Delete
+'If wb.Sheets.Count > 1 Then wb.Sheets("å·¥ä½œè¡¨1").Delete
 
 If print_mode = 3 Or print_mode = 4 Then
 
@@ -106,7 +106,7 @@ End If
 Application.DisplayAlerts = True
 Application.ScreenUpdating = True
 
-ThisWorkbook.Sheets("¤é³ø¶ñ¼g").Activate
+ThisWorkbook.Sheets("æ—¥å ±å¡«å¯«").Activate
 
 End Sub
 
@@ -159,13 +159,13 @@ Call obj.outputData(wb, False)
 
 End If
 
-ThisWorkbook.Sheets("¤é³ø¶ñ¼g").Activate
+ThisWorkbook.Sheets("æ—¥å ±å¡«å¯«").Activate
 
 wb.Activate
 
 End Sub
 
-Sub cmdGetDataByTmpName(ByVal tmpType As String, ByVal tmpName As String) 'only for ¬I¤u¤u¶µ
+Sub cmdGetDataByTmpName(ByVal tmpType As String, ByVal tmpName As String) 'only for æ–½å·¥å·¥é …
 
 Dim dataObj As New clsWriteData
 Call dataObj.hideRng(1, False)
@@ -180,10 +180,10 @@ End Sub
 
 Sub cmdRecordTmp()
 
-tmpType = InputBox("½Ğ¿é¤J½d¥»ºØÃş" & vbNewLine & "1.¬I¤u¤u¶µ" & vbNewLine & "2.§÷®ÆºŞ²z", , "1")
-If Not (tmpType = "1" Or tmpType = "2") Then MsgBox "½Ğ¿é¤J1©Î2", vbCritical: End
+tmpType = InputBox("è«‹è¼¸å…¥ç¯„æœ¬ç¨®é¡" & vbNewLine & "1.æ–½å·¥å·¥é …" & vbNewLine & "2.ææ–™ç®¡ç†", , "1")
+If Not (tmpType = "1" Or tmpType = "2") Then MsgBox "è«‹è¼¸å…¥1æˆ–2", vbCritical: End
 
-tmpName = InputBox("½Ğ¿é¤J½d¥»¦WºÙ")
+tmpName = InputBox("è«‹è¼¸å…¥ç¯„æœ¬åç¨±")
 
 Dim checkObj As New clsCheck
 checkObj.checkTmpNameExist (tmpName)
@@ -228,7 +228,7 @@ MLEobj.setValidation_MLE
 
 End Sub
 
-Sub cmdDeleteData() '§R°£
+Sub cmdDeleteData() 'åˆªé™¤
 
 Application.ScreenUpdating = False
 
@@ -260,9 +260,9 @@ If mode = "DeleteMode" Then
     checkObj.checkIsDataUndefine
     checkObj.checkIsDataUsed
 Else
-    checkObj.checkIsDataUndefine '¬O§_¸ê®Æ¤£¦Xªk
-    checkObj.checkIsDataEmpty '¬O§_¬°ªÅ­È(¤u¶µ)
-    checkObj.checkIsDataUsed '¬O§_¦³­«½Æ(¤u¶µ~MLE)
+    checkObj.checkIsDataUndefine 'æ˜¯å¦è³‡æ–™ä¸åˆæ³•
+    checkObj.checkIsDataEmpty 'æ˜¯å¦ç‚ºç©ºå€¼(å·¥é …)
+    checkObj.checkIsDataUsed 'æ˜¯å¦æœ‰é‡è¤‡(å·¥é …~MLE)
 End If
 
 obj.readInformation
@@ -277,17 +277,17 @@ obj.clearDataAll
 If test_mode = False Then
 
     If mode = "" Then
-        MsgBox "Àx¦s§¹¦¨!½s¸¹¬°" & obj.recCode, vbInformation
+        MsgBox "å„²å­˜å®Œæˆ!ç·¨è™Ÿç‚º" & obj.recCode, vbInformation
     Else
-        MsgBox "½s¸¹¬°" & obj.recCode & "¤w§@¼o!", vbInformation
+        MsgBox "ç·¨è™Ÿç‚º" & obj.recCode & "å·²ä½œå»¢!", vbInformation
     End If
 
 Else
 
     If mode = "" Then
-        Debug.Print "Àx¦s§¹¦¨!½s¸¹¬°" & obj.recCode,
+        Debug.Print "å„²å­˜å®Œæˆ!ç·¨è™Ÿç‚º" & obj.recCode,
     Else
-        Debug.Print "½s¸¹¬°" & obj.recCode & "¤w§@¼o!"
+        Debug.Print "ç·¨è™Ÿç‚º" & obj.recCode & "å·²ä½œå»¢!"
     End If
 
 
@@ -322,7 +322,18 @@ Next
 'Call obj.hideRng(1, False)
 
 Dim pccesObj As New clsPCCES
+
+msg = MsgBox("æ˜¯å¦è¼‰å…¥å·²ç¶“å®Œæˆçš„é …ç›®?", vbYesNo + vbInformation)
+
+If msg = vbYes Then
+
+pccesObj.setValidation2
+
+Else
+
 pccesObj.setValidation
+
+End If
 
 Dim MLEobj As New clsMLE
 MLEobj.setValidation_MLE
@@ -345,7 +356,7 @@ obj.checkIsRepeat
 obj.RefreshDB
 obj.setValidation
 
-Sheets("«´¬ù¸Ô²Óªí").Activate
+Sheets("å¥‘ç´„è©³ç´°è¡¨").Activate
 
 End Sub
 
@@ -371,7 +382,7 @@ Sub showDayReportForm()
 
 DayReportForm.Show (0)
 
-'ThisWorkbook.Sheets("¤é³ø¶ñ¼g").Activate
+'ThisWorkbook.Sheets("æ—¥å ±å¡«å¯«").Activate
 
 End Sub
 
@@ -379,7 +390,7 @@ Sub showLongReportForm()
 
 LongReportForm.Show (0)
 
-'ThisWorkbook.Sheets("¤é³ø¶ñ¼g").Activate
+'ThisWorkbook.Sheets("æ—¥å ±å¡«å¯«").Activate
 
 End Sub
 
@@ -458,7 +469,7 @@ Sub cmdGetProgByInter() '20230624
 Call checkProgSetting
 Set collProg = getProgColl
 
-With Sheets("¤Ñ®ğ³]©w")
+With Sheets("å¤©æ°£è¨­å®š")
 
     lr = .Cells(.Rows.Count, 4).End(xlUp).Row
 
@@ -502,10 +513,10 @@ End Sub
 
 Sub checkProgSetting()
 
-fixStartDate = Sheets("¼Ğ®×³]©w").Range("B3")
-fixEndDate = Sheets("¼Ğ®×³]©w").Range("B4")
+fixStartDate = Sheets("æ¨™æ¡ˆè¨­å®š").Range("B3")
+fixEndDate = Sheets("æ¨™æ¡ˆè¨­å®š").Range("B4")
 
-With Sheets("¤Ñ®ğ³]©w")
+With Sheets("å¤©æ°£è¨­å®š")
 
     lr = .Cells(.Rows.Count, 1).End(xlUp).Row
     
@@ -516,14 +527,14 @@ With Sheets("¤Ñ®ğ³]©w")
     
     If progStartDate <> fixStartDate Then
     
-        MsgBox ("¶}¤u¤é¡u" & progStartDate & "¡v¡A»P¼Ğ®×³]©w¶}¤u¤é¡u" & fixStartDate & "¡v¤£¤@¼Ë!"), vbCritical
+        MsgBox ("é–‹å·¥æ—¥ã€Œ" & progStartDate & "ã€ï¼Œèˆ‡æ¨™æ¡ˆè¨­å®šé–‹å·¥æ—¥ã€Œ" & fixStartDate & "ã€ä¸ä¸€æ¨£!"), vbCritical
         End
         
     End If
     
     If progEndDate <> fixEndDate Then
     
-        MsgBox ("µ¤¤u¤é¡u" & progEndDate & "¡v¡A»P¼Ğ®×³]©wµ¤¤u¡u" & fixEndDate & "¡v¤£¤@¼Ë!"), vbCritical
+        MsgBox ("ç«£å·¥æ—¥ã€Œ" & progEndDate & "ã€ï¼Œèˆ‡æ¨™æ¡ˆè¨­å®šç«£å·¥ã€Œ" & fixEndDate & "ã€ä¸ä¸€æ¨£!"), vbCritical
         End
         
     End If
@@ -531,14 +542,14 @@ With Sheets("¤Ñ®ğ³]©w")
     If progStartProg = "" Then
     
         .Cells(2, 4) = 0
-        MsgBox "¨t²Î¦Û°Ê©ó¶}¤u¤é¸É¤W0%", vbInformation
+        MsgBox "ç³»çµ±è‡ªå‹•æ–¼é–‹å·¥æ—¥è£œä¸Š0%", vbInformation
         
     End If
     
     If progEndProg <> 1 Then
     
         .Cells(lr, 4) = 1
-        MsgBox "¨t²Î¦Û°Ê©óµ¤¤u¤é¸É¤W100%", vbInformation
+        MsgBox "ç³»çµ±è‡ªå‹•æ–¼ç«£å·¥æ—¥è£œä¸Š100%", vbInformation
     
     End If
     
@@ -550,7 +561,7 @@ Function getProgColl()
 
 Dim coll As New Collection
 
-With Sheets("¤Ñ®ğ³]©w")
+With Sheets("å¤©æ°£è¨­å®š")
 
     lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -573,15 +584,15 @@ End With
 
 Set getProgColl = coll
 
-If coll.Count = 2 Then MsgBox ("«ØÄ³¦b¹w©w¶i«×ªºÄæ¦ì¡uD¡v¶ñ¼g¶i«×¡A¤º®t¦¨ªG¤~·|¤ñ¸û·Ç½T!"), vbCritical
+If coll.Count = 2 Then MsgBox ("å»ºè­°åœ¨é å®šé€²åº¦çš„æ¬„ä½ã€ŒDã€å¡«å¯«é€²åº¦ï¼Œå…§å·®æˆæœæ‰æœƒæ¯”è¼ƒæº–ç¢º!"), vbCritical
 
 End Function
 
 Sub cmdAddDefineWorkPlace()
 
-myPlace = InputBox("½Ğ¿é¤J¦Û©w¸qªº¤uµ{¦aÂI:")
+myPlace = InputBox("è«‹è¼¸å…¥è‡ªå®šç¾©çš„å·¥ç¨‹åœ°é»:")
 
-With Sheets("¤é³ø¶ñ¼g")
+With Sheets("æ—¥å ±å¡«å¯«")
     .Range("B3").Validation.Delete
     .Range("B3") = myPlace
 End With

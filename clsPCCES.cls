@@ -17,11 +17,11 @@ Application.ScreenUpdating = False
 
 End Sub
 
-Sub getFileName() '���o�w��Ѥ��e
+Sub getFileName() '取得預算書內容
 
 f = Application.GetOpenFilename
 
-If f = "False" Then MsgBox "�����o�ɮ�", vbCritical: End
+If f = "False" Then MsgBox "未取得檔案", vbCritical: End
 
 tmp = Split(f, "\")
 
@@ -35,18 +35,18 @@ End Sub
 
 Sub clearPCCES_data()
 
-With ThisWorkbook.Sheets("�����ԲӪ�")
+With ThisWorkbook.Sheets("契約詳細表")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 If lr > 1 Then
     .Activate
-    msg = MsgBox("�A���¸�Ʀs�b�A�T�w�n�R��?", vbCritical + vbYesNo)
+    msg = MsgBox("你有舊資料存在，確定要刪除?", vbCritical + vbYesNo)
     
     If msg = vbYes Then
         .Range("A2").Resize(lr, 7).Clear
     Else
-        MsgBox "�����ާ@", vbInformation
+        MsgBox "取消操作", vbInformation
         wb.Close False
         End
     End If
@@ -61,7 +61,7 @@ Function getShtContentName()
 
 For Each sht In wb.Sheets
 
-    If sht.Name Like "*�ԲӪ�" Then
+    If sht.Name Like "*詳細表" Then
     
         getShtContentName = sht.Name
     
@@ -85,7 +85,7 @@ With wb.Sheets(getShtContentName)
         item_amount = .Cells(r, 4)
         item_cost = .Cells(r, 5)
         
-        '�C�X�Ҧ�����for�ĤT���q�վ�
+        '列出所有項目for第三階段調整
         
         If item_num <> "" Then 'And item_amount <> 0 Then
         
@@ -99,7 +99,7 @@ With wb.Sheets(getShtContentName)
 
 End With
 
-MsgBox "���oPCCES�w��ѧ����A�жi�泡�����طL��", vbInformation
+MsgBox "取得PCCES預算書完成，請進行部分項目微調", vbInformation
 
 wb.Close False
 
@@ -142,7 +142,7 @@ End Function
 
 Private Sub getData(ByVal num As String, ByVal cont As String, ByVal unit As String, ByVal amount As String, ByVal cost As String)
 
-    With ThisWorkbook.Sheets("�����ԲӪ�")
+    With ThisWorkbook.Sheets("契約詳細表")
     
         lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         
@@ -163,9 +163,9 @@ Private Sub getData(ByVal num As String, ByVal cont As String, ByVal unit As Str
 
 End Sub
 
-Sub setValidation()
+Sub setValidation2()
 
-With Sheets("�����ԲӪ�")
+With Sheets("契約詳細表")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -173,16 +173,16 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 End With
 
-With Sheets("�����g")
+With Sheets("日報填寫")
 
 .Unprotect
 
-For r = 7 To 7 + 100 '�u�������100��
+For r = 7 To 7 + 100 '只有取到第100欄
 
     .Range("A" & r).Validation.Delete
 
     .Range("A" & r).Validation.Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
-Formula1:="=�����ԲӪ�!$A" & 2 & ":$A" & lr
+Formula1:="=契約詳細表!$A" & 2 & ":$A" & lr
 
 Next
 
@@ -193,9 +193,130 @@ End With
 
 End Sub
 
+Sub setValidation()
+
+    Dim customRange As String
+    Dim wsContract As Worksheet
+    Dim wsValidation As Worksheet
+    Dim customRangeArray() As String
+    Dim i As Long
+    
+    ' 獲取匹配的範圍
+    customRange = CompareContractAndActualQuantities()
+    
+    ' 設定工作表變數
+    Set wsContract = Sheets("契約詳細表")
+    ' 你可以選擇將值放在一個新的工作表中或在契約詳細表中的空白區域
+    Set wsValidation = Sheets("標案設定") ' 例如，可以將匹配值放在契約詳細表的某一空白列中
+    
+    wsValidation.Range("K1:K" & wsValidation.Cells(1, 1).End(xlDown).Row).ClearContents
+    
+    ' 將 customRange 拆分成單個地址
+    customRangeArray = Split(customRange, ",")
+    
+    ' 將這些值放在 wsValidation 的某個空白區域，例如列 K
+    For i = LBound(customRangeArray) To UBound(customRangeArray)
+        wsValidation.Range("K" & i + 1).Value = wsContract.Range(customRangeArray(i)).Value
+    Next i
+    
+    With Sheets("日報填寫")
+    
+        .Unprotect
+    
+        For r = 7 To 7 + 100 '只有取到第100欄
+    
+            .Range("A" & r).Validation.Delete
+    
+            .Range("A" & r).Validation.Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+                Formula1:="=標案設定!$K$1:$K$" & UBound(customRangeArray) + 1
+    
+        Next
+    
+        .Protect
+        .Activate
+    
+    End With
+
+End Sub
+
+
+Function CompareContractAndActualQuantities()
+
+    Dim wsData As Worksheet
+    Dim wsContract As Worksheet
+    Dim dict As Object
+    Dim contractDict As Object
+    Dim rng As Range
+    Dim cell As Range
+    Dim key As Variant
+    Dim i As Long
+    Dim actualQty As Double
+    Dim contractQty As Double
+    Dim matchRanges As String
+    
+    ' 設定工作表變數
+    Set wsData = Sheets("日報資料庫") ' 請根據你的實際工作表名稱調整
+    Set wsContract = Sheets("契約詳細表") ' 請根據你的實際工作表名稱調整
+    
+    ' 建立 Dictionary 物件來儲存累積數量
+    Set dict = CreateObject("Scripting.Dictionary")
+    Set contractDict = CreateObject("Scripting.Dictionary")
+    
+    ' 迭代契約詳細表範圍，記錄契約數量
+    For i = 2 To wsContract.Cells(wsContract.Rows.Count, "B").End(xlUp).Row
+        key = wsContract.Cells(i, "B").Value
+        contractQty = wsContract.Cells(i, "E").Value
+        contractDict(key) = contractQty
+    Next i
+    
+    ' 迭代日報資料庫範圍，統計 D 欄位的累積數量
+    For i = 2 To wsData.Cells(wsData.Rows.Count, "D").End(xlUp).Row
+        key = wsData.Cells(i, "D").Value
+        If wsData.Cells(i, "H").Value = "" Then ' 檢查 H 欄位是否為空白
+            If Not dict.exists(key) Then
+                dict.Add key, wsData.Cells(i, "G").Value
+            Else
+                dict(key) = dict(key) + wsData.Cells(i, "G").Value
+            End If
+        End If
+    Next i
+    
+    ' 比較契約數量與實作數量
+    matchRanges = ""
+    For i = 2 To wsContract.Cells(wsContract.Rows.Count, "B").End(xlUp).Row
+        key = wsContract.Cells(i, "B").Value
+
+        If dict.exists(key) Then
+            actualQty = dict(key)
+        Else
+            actualQty = 0
+        End If
+        contractQty = contractDict(key)
+        If contractQty > actualQty Then
+            Debug.Print key & ">" & wsContract.Cells(i, "C").Value & ":" & contractQty & ">" & actualQty
+            If matchRanges = "" Then
+                matchRanges = wsContract.Cells(i, "A").Address
+            Else
+                matchRanges = matchRanges & "," & wsContract.Cells(i, "A").Address
+            End If
+        End If
+    Next i
+    
+    ' 輸出匹配的範圍
+    Debug.Print "匹配的範圍: " & matchRanges
+    CompareContractAndActualQuantities = matchRanges
+    
+    ' 清理
+    Set dict = Nothing
+    Set contractDict = Nothing
+    Set wsData = Nothing
+    Set wsContract = Nothing
+
+End Function
+
 Sub RefreshDB()
 
-With Sheets("�����榡")
+With Sheets("長表格式")
 
 .Unprotect
 
@@ -209,7 +330,7 @@ lc = .Cells(1, .Columns.Count).End(xlToLeft).Column
 
 End With
 
-With Sheets("�d����Ʈw")
+With Sheets("範本資料庫")
 
 .Unprotect
 
@@ -220,12 +341,12 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
 End With
 
-arr = Array("���", "����", "�H��", "����", "���")
-'arr = Array("����", "�H��", "����", "���")
+arr = Array("日報", "材料", "人員", "機具", "文件")
+'arr = Array("材料", "人員", "機具", "文件")
 
 For i = LBound(arr) To UBound(arr)
 
-    With Sheets(arr(i) & "��Ʈw")
+    With Sheets(arr(i) & "資料庫")
     
         .Unprotect
         
@@ -242,11 +363,11 @@ End Sub
 
 Function getSumMoney()
 
-With Sheets("�����ԲӪ�")
+With Sheets("契約詳細表")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
-Set rng = .Rows("1").Find("�ƶq")
+Set rng = .Rows("1").Find("數量")
 
 c = rng.Column
 
@@ -262,7 +383,7 @@ Next
 
 End With
 
-With Sheets("�Ю׳]�w")
+With Sheets("標案設定")
 
     lr = .Cells(.Rows.Count, "F").End(xlUp).Row
 
@@ -279,13 +400,13 @@ End Function
 
 Function getContractMoneyByKeyItem(ByVal s As String) As Double
 
-With Sheets("�����ԲӪ�")
+With Sheets("契約詳細表")
 
 Set rng = .Columns("A").Find(s)
 
 If rng Is Nothing Then
     
-    MsgBox "�����ԲӪ����䤣��" & s & "!"
+    MsgBox "契約詳細表中找不到" & s & "!"
 
 Else
 
@@ -302,10 +423,10 @@ End Function
 
 Function getMoneyByItemKey(ByVal item_key)
 
-With Sheets("�����ԲӪ�")
+With Sheets("契約詳細表")
 
 r = .Columns("A").Find(item_key).Row
-c = .Rows("1").Find("�ƶq").Column
+c = .Rows("1").Find("數量").Column
     
 getMoneyByItemKey = .Cells(r, c + 1)
 
@@ -317,7 +438,7 @@ Function getAllItems()
 
 Dim coll As New Collection
 
-With ThisWorkbook.Sheets("�����ԲӪ�")
+With ThisWorkbook.Sheets("契約詳細表")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -339,7 +460,7 @@ Sub checkIsRepeat()
 
 Dim coll As New Collection
 
-With Sheets("�����ԲӪ�")
+With Sheets("契約詳細表")
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
@@ -355,15 +476,15 @@ If s <> "" Then
     MsgBox s, vbCritical
     .Range("A2").Resize(lr, 7).Clear
 Else
-    Debug.Print "�����ԲӪ��Ҭ��ߤ@��!"
+    Debug.Print "契約詳細表皆為唯一值!"
 End If
 
 Exit Sub
 
 End With
 
-ERRORHANDLE:       ' ���~�B�z�Ϊ��{���X
-  s = s & "�C��=" & r & ",����=" & mykey & "�w�g�Q�ϥ�!�Эץ�!" & vbNewLine
+ERRORHANDLE:       ' 錯誤處理用的程式碼
+  s = s & "列數=" & r & ",項目=" & mykey & "已經被使用!請修正!" & vbNewLine
   Resume Next
 
 End Sub
