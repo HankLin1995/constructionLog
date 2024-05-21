@@ -1,4 +1,53 @@
 Attribute VB_Name = "tmp_code"
+Sub getProgress(ByVal recDate_str As String)
+
+Dim obj As New clsDayReport
+Dim PCCESobj As New clsPCCES
+Dim myFunc As New clsMyfunction
+
+recDate = recDate_str ' "1120910"
+recCode = recDate & "-1"
+mode = 1
+obj.print_mode = 1
+
+Set coll_item = obj.getUsedItemByDate(recCode, myFunc.tranDate(recDate), 1)
+
+For Each it In coll_item
+    
+    sum_amount = obj.getSumAmountByItem(it, myFunc.tranDate(recDate), mode)
+    
+    price = PCCESobj.getMoneyByItemKey(it)
+
+    use_money = use_money + price * sum_amount
+
+Next
+
+progress = use_money / PCCESobj.getSumMoney
+
+Dim pgs_rec_date As String
+
+With ThisWorkbook.Sheets("天氣設定")
+
+    lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+    
+    For r = 2 To lr
+    
+        pgs_rec_date = .Cells(r, 1)
+    
+        If pgs_rec_date = CStr(myFunc.tranDate(recDate_str)) Then
+        
+            r_pgs = r: Exit For
+    
+        End If
+    
+    Next
+
+    .Cells(r_pgs, "E") = progress
+
+End With
+
+End Sub
+
 Sub checkUsedItems()
 
 With Sheets("契約詳細表")

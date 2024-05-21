@@ -211,9 +211,9 @@ Next
 Dim recObj As New clsRecord
 recObj.getDatabyCode (myCode)
 
-Dim pccesObj As New clsPCCES
+Dim PCCESobj As New clsPCCES
 
-pccesObj.setValidation
+PCCESobj.setValidation
 
 Dim MLEobj As New clsMLE
 MLEobj.setValidation_MLE
@@ -271,6 +271,10 @@ Call checkObj.checkInformation(obj.recCode)
 
 obj.ReadData
 
+pgs_recDate = obj.recDate
+
+Call getProgress(pgs_recDate)
+
 obj.clearInformation
 obj.clearDataAll
 
@@ -289,7 +293,6 @@ Else
     Else
         Debug.Print "編號為" & obj.recCode & "已作廢!"
     End If
-
 
 End If
 
@@ -321,17 +324,17 @@ Next
 
 'Call obj.hideRng(1, False)
 
-Dim pccesObj As New clsPCCES
+Dim PCCESobj As New clsPCCES
 
 msg = MsgBox("是否載入已經完成的項目?", vbYesNo + vbInformation)
 
 If msg = vbYes Then
 
-pccesObj.setValidation2
+PCCESobj.setValidation2
 
 Else
 
-pccesObj.setValidation
+PCCESobj.setValidation
 
 End If
 
