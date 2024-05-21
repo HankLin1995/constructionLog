@@ -31,7 +31,7 @@ Function getSameCode()
 
 'If mode > 1 Then Set shtRec = Sheets(dataObj.getDB_name(mode))
 
-Set shtRec = Sheets(dataObj.getDB_name(1))
+Set shtRec = Sheets(dataObj.getDB_name(5))
 
 Dim coll As New Collection
 
@@ -235,7 +235,7 @@ End Sub
 
 Function getRecLoc(ByVal recCode As String)
 
-With Sheets("文件資料庫")
+With Sheets("文件資料庫") '未施工項目也可以取得他的工作地點
 
 lr = .Cells(.Rows.Count, 1).End(xlUp).Row
 
