@@ -388,7 +388,7 @@ With Sheets("標案設定")
     lr = .Cells(.Rows.Count, "F").End(xlUp).Row
 
     For r = 2 To lr
-    
+
         getSumMoney = getSumMoney - getContractMoneyByKeyItem(.Cells(r, "F"))
     
     Next

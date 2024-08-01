@@ -170,3 +170,28 @@ End With
 
 End Function
 
+Function getAllItems(ByVal item_type As String)
+
+Dim coll As New Collection
+
+With Sheets("工料設定")
+
+lr = .Cells(.Rows.Count, 1).End(xlUp).Row
+
+For r = 2 To lr
+
+    If mid(.Cells(r, 2), 1, 1) = item_type And .Cells(r, "F") <> 0 Then
+    
+        coll.Add .Cells(r, 1).Value
+    
+    End If
+
+Next
+
+Set getAllItems = coll
+
+End With
+
+
+End Function
+

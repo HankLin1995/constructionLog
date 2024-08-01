@@ -22,14 +22,15 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub cmdAdd_Click()
 
-Dim MLEobj As New clsMLE
+Dim MLEObj As New clsMLE
 
-Call MLEobj.ReadData
-Call MLEobj.sortData
+Call MLEObj.ReadData
+Call MLEObj.sortData
 
-Call MLEobj.setValidation_MLE
+Call MLEObj.setValidation_MLE
 
 End Sub
 

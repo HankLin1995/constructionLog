@@ -2,7 +2,7 @@ Attribute VB_Name = "tmp_code"
 Sub getProgress(ByVal recDate_str As String)
 
 Dim obj As New clsDayReport
-Dim PCCESobj As New clsPCCES
+Dim pccesObj As New clsPCCES
 Dim myFunc As New clsMyfunction
 
 recDate = recDate_str ' "1120910"
@@ -16,13 +16,13 @@ For Each it In coll_item
     
     sum_amount = obj.getSumAmountByItem(it, myFunc.tranDate(recDate), mode)
     
-    price = PCCESobj.getMoneyByItemKey(it)
+    price = pccesObj.getMoneyByItemKey(it)
 
     use_money = use_money + price * sum_amount
 
 Next
 
-progress = use_money / PCCESobj.getSumMoney
+progress = use_money / pccesObj.getSumMoney
 
 Dim pgs_rec_date As String
 

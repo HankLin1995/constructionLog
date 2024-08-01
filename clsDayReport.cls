@@ -73,7 +73,7 @@ Sub outputData(ByVal wb As Object, ByVal code As String)
 
 ThisWorkbook.Activate
 
-If print_mode = 1 Or print_mode = 2 Then
+If print_mode = 1 Or print_mode = 2 Or print_mode = 5 Then
 
     ThisWorkbook.Sheets("日報第一聯").Copy (wb.Sheets(1))
 
@@ -199,6 +199,60 @@ Call KeyInItem_Paper(recCode)
 
 End Sub
 
+Sub getDataByDate_All(ByVal recDate As Date, ByVal recCode As String) '第一聯累計工項不為0
+
+Dim recObj As New clsRecord
+Dim pccesObj As New clsPCCES
+Dim MLEObj As New clsMLE
+
+'===== basic information=======
+
+ThisWorkbook.Activate
+
+With Sheets("日報第一聯")
+
+.Range("B2") = recCode
+.Range("K2") = recObj.getRecLoc(recCode)
+.Range("K3") = recDate
+
+.Rows.Hidden = False
+
+End With
+
+'====1-施工工項==========
+
+
+i = 1
+
+Set coll_item = pccesObj.getAllItems
+
+Call checkReportCount(coll_item.Count, i)
+Call KeyInItem(coll_item, recDate, recCode, i)
+
+
+'====、2-材料管理====
+
+i = 2
+
+Set coll_item = MLEObj.getAllItems("M") 'getUsedItemByDate(recCode, recDate, i)
+Call checkReportCount(coll_item.Count, i)
+Call KeyInItem_mat(coll_item, recDate, recCode, i)
+
+
+'======3-人員、4-機具================
+
+Set coll_L = MLEObj.getAllItems("L") ' getUsedItemByDate(recCode, recDate, 3)
+Set coll_E = MLEObj.getAllItems("E") ' getUsedItemByDate(recCode, recDate, 4)
+
+Call checkReportCount(WorksheetFunction.Max(coll_L.Count, coll_E.Count), 3)
+Call KeyInItem_Merge(coll_L, coll_E, recDate, recCode, 3)
+
+'=====5-文件============
+
+Call KeyInItem_Paper(recCode)
+
+End Sub
+
 Sub KeyInItem_Paper(ByVal recCode As String)
 
 With ThisWorkbook.Sheets("日報第一聯")
@@ -312,15 +366,16 @@ With Sheets("日報第一聯")
 
 Call getReportSrEr(sr, er, mode) '取得起始列、終點列
 
-.Range("A" & sr + 2 & ":M" & er - 1).ClearContents
+.Range("A" & sr + 1 & ":M" & er - 1 - 2).ClearContents
 
-r = sr + 2
+r = sr + 1
 
 For Each it In coll_item
 
     If r = er Then Stop
-
-    .Range("A" & r) = Split(it, ">")(1)
+    
+    .Range("A" & r) = Split(it, ">")(0)
+    .Range("B" & r) = Split(it, ">")(1)
     
     If (Len(.Range("A" & r)) * 1.1) > 16.5 Then
     
@@ -333,10 +388,15 @@ For Each it In coll_item
     End If
     
     .Range("E" & r) = getUnitByItem(it, mode)
-    .Range("F" & r) = getAmountByItem(it, mode)
-    .Range("H" & r) = getUsedAmountByItem(it, recCode, mode)
-    .Range("J" & r) = getSumAmountByItem(it, recDate, mode)
-    .Range("A" & r & ":J" & r).Font.Name = "標楷體"
+    
+    If .Range("E" & r) <> "" Then
+    
+        .Range("F" & r) = getAmountByItem(it, mode)
+        .Range("H" & r) = getUsedAmountByItem(it, recCode, mode)
+        .Range("J" & r) = getSumAmountByItem(it, recDate, mode)
+        .Range("A" & r & ":J" & r).Font.Name = "標楷體"
+        
+    End If
     
     If mode = 1 Then
     price = o.getMoneyByItemKey(it)
@@ -358,6 +418,65 @@ If mode = 1 Then
     .Range("K8") = progress
 
 End If
+
+End With
+
+End Sub
+
+Sub KeyInItem_mat(ByVal coll_item, ByVal recDate As Date, ByVal recCode As String, ByVal mode As Byte) ', ByVal recLoc As String)
+
+Dim o As New clsPCCES
+
+With Sheets("日報第一聯")
+
+Call getReportSrEr(sr, er, mode) '取得起始列、終點列
+
+.Range("A" & sr + 2 & ":M" & er - 1).ClearContents
+
+r = sr + 2
+
+For Each it In coll_item
+
+    If r = er Then Stop
+    
+    .Range("A" & r) = Split(it, ">")(1)
+
+    If (Len(.Range("A" & r)) * 1.1) > 16.5 Then
+    
+    .Range("A" & r).RowHeight = Len(.Range("A" & r)) * 1.1
+    
+    Else
+    
+    .Range("A" & r).RowHeight = 16.5
+    
+    End If
+    
+    .Range("E" & r) = getUnitByItem(it, mode)
+    
+    If .Range("E" & r) <> "" Then
+    
+        .Range("F" & r) = getAmountByItem(it, mode)
+        .Range("H" & r) = getUsedAmountByItem(it, recCode, mode)
+        .Range("J" & r) = getSumAmountByItem(it, recDate, mode)
+        .Range("A" & r & ":J" & r).Font.Name = "標楷體"
+        
+    End If
+    
+    If mode = 1 Then
+    price = o.getMoneyByItemKey(it)
+    amount = .Range("J" & r)
+    use_money = use_money + price * amount
+
+    End If
+
+    .Range("A" & r).WrapText = True
+    '.Range("A" & r).ShrinkToFit = True
+
+    r = r + 1
+    
+Next
+
+
 
 End With
 
@@ -589,7 +708,17 @@ With Sheets("日報第一聯")
 
 Call getReportSrEr(sr, er, mode) '取得標題之起迄列
 
+Debug.Print sr & ">" & er
+
+If mode = 1 Then
+
+total_count = (er - 2) - (sr + 2) + 1
+
+ElseIf mode = 2 Then
+
 total_count = (er - 1) - (sr + 2) + 1
+
+End If
 
 needRow = item_count - total_count
 
@@ -627,7 +756,7 @@ lr = .Cells(.Rows.Count, 1).End(xlUp).Row
         recNote = .Cells(r, "H")
         
         'If print_mode = 2 Or print_mode = 3 Then '累計
-        If print_mode = 1 Or print_mode = 2 Or print_mode = 3 Then '累計
+        If print_mode = 1 Or print_mode = 2 Or print_mode = 3 Or print_mode = 5 Then '累計
         
             If myFun.tranDate(recDate) <= mydate And recNote = "" Then
         

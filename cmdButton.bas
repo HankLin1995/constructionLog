@@ -27,7 +27,11 @@ ElseIf .optMode3.Value = True Then
     print_mode = 3
 ElseIf .optMode4.Value = True Then
     print_mode = 4
+ElseIf .optMode5.Value = True Then
+    print_mode = 5
+
 End If
+
 
 obj.print_mode = print_mode
 
@@ -64,6 +68,11 @@ For r = er To sr Step -1
         ElseIf print_mode = 3 Or print_mode = 4 Then
         
             'Call obj.getDataByDate_second(obj.workDate + r - 1, code)
+            
+        ElseIf print_mode = 5 Then
+        
+            Call obj.getDataByDate_All(obj.workDate + r - 1, code)
+            Call obj.hideEmptyRow
         
         End If
         
@@ -211,12 +220,12 @@ Next
 Dim recObj As New clsRecord
 recObj.getDatabyCode (myCode)
 
-Dim PCCESobj As New clsPCCES
+Dim pccesObj As New clsPCCES
 
-PCCESobj.setValidation
+pccesObj.setValidation
 
-Dim MLEobj As New clsMLE
-MLEobj.setValidation_MLE
+Dim MLEObj As New clsMLE
+MLEObj.setValidation_MLE
 
 'obj.getWorkPlaceValidation
 '
@@ -324,22 +333,22 @@ Next
 
 'Call obj.hideRng(1, False)
 
-Dim PCCESobj As New clsPCCES
+Dim pccesObj As New clsPCCES
 
 msg = MsgBox("是否載入已經完成的項目?", vbYesNo + vbInformation)
 
 If msg = vbYes Then
 
-PCCESobj.setValidation2
+pccesObj.setValidation2
 
 Else
 
-PCCESobj.setValidation
+pccesObj.setValidation
 
 End If
 
-Dim MLEobj As New clsMLE
-MLEobj.setValidation_MLE
+Dim MLEObj As New clsMLE
+MLEObj.setValidation_MLE
 
 Call obj.setValidation
 Call obj.getWorkPlaceValidation

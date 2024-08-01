@@ -44,8 +44,8 @@ End With
     Next
     
     ActiveChart.ChartTitle.Select
-    ActiveChart.ChartTitle.text = "[§Aªº¤uµ{¦WºÙ]"
-    Selection.Format.TextFrame2.TextRange.Characters.text = "[§Aªº¤uµ{¦WºÙ]"
+    ActiveChart.ChartTitle.Text = "[§Aªº¤uµ{¦WºÙ]"
+    Selection.Format.TextFrame2.TextRange.Characters.Text = "[§Aªº¤uµ{¦WºÙ]"
     With Selection.Format.TextFrame2.TextRange.Characters(1, 2).ParagraphFormat
         .TextDirection = msoTextDirectionLeftToRight
         .Alignment = msoAlignCenter
